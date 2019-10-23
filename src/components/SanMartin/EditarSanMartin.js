@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
-import firebase from '../Firebase';
+import firebase from '../../Firebase';
 import { Link } from 'react-router-dom';
 import TextField from '@material-ui/core/TextField';
 import Grid from "@material-ui/core/Grid";
@@ -8,13 +7,14 @@ import InputAdornment from "@material-ui/core/InputAdornment";
 import Fab from "@material-ui/core/Fab";
 import NavigationIcon from "@material-ui/icons/Navigation";
 
-class Create extends Component {
+class EditarSanMartin extends Component {
 
-  constructor() {
-    super();
-    this.ref = firebase.firestore().collection('solicitudes');
+  constructor(props) {
+    super(props);
     this.state = {
-      distrito: 'Huehuetenango',
+      key: '',
+      estadosoli: '',
+      distrito: '',
       cantidad: '',
       destino: '',
       fecha: '',
@@ -23,18 +23,43 @@ class Create extends Component {
       vehiculo: ''
     };
   }
+
+  componentDidMount() {
+    const ref = firebase.firestore().collection('solicitudes-san-martin').doc(this.props.match.params.id);
+    ref.get().then((doc) => {
+      if (doc.exists) {
+        const solicitudsanmartin = doc.data();
+        this.setState({
+          key: doc.id,
+          estadosoli: solicitudsanmartin.estadosoli,
+          distrito: solicitudsanmartin.distrito,
+          cantidad: solicitudsanmartin.cantidad,
+          destino: solicitudsanmartin.destino,
+          fecha: solicitudsanmartin.fecha,
+          personas: solicitudsanmartin.personas,
+          piloto: solicitudsanmartin.piloto,
+          vehiculo: solicitudsanmartin.vehiculo
+        });
+      } else {
+        console.log("No such document!");
+      }
+    });
+  }
+
   onChange = (e) => {
     const state = this.state
     state[e.target.name] = e.target.value;
-    this.setState(state);
+    this.setState({solicitudsanmartin:state});
   }
 
   onSubmit = (e) => {
     e.preventDefault();
 
-    const { distrito, cantidad, destino, fecha, personas, piloto, vehiculo } = this.state;
+    const { estadosoli, distrito, cantidad, destino, fecha, personas, piloto, vehiculo } = this.state;
 
-    this.ref.add({
+    const updateRef = firebase.firestore().collection('solicitudes-san-martin').doc(this.state.key);
+    updateRef.set({
+      estadosoli,
       distrito,
       cantidad,
       destino,
@@ -44,7 +69,9 @@ class Create extends Component {
       vehiculo
     }).then((docRef) => {
       this.setState({
-        distrito: 'Huehuetenango',
+        key: '',
+        estadosoli: '',
+        distrito: '',
         cantidad: '',
         destino: '',
         fecha: '',
@@ -52,62 +79,44 @@ class Create extends Component {
         piloto: '',
         vehiculo: ''
       });
-      this.props.history.push("/list")
+      //this.props.history.push("/show/"+this.props.match.params.id)
+      this.props.history.push("/lista-solicitudes-san-martin")
     })
     .catch((error) => {
       console.error("Error adding document: ", error);
     });
   }
 
-
- 
-
   render() {
-   /* function aparece(){
-      var distrito2 = document.getElementById('distrito2');
-      distrito2.innerHTML = "Retalhuleu"
-      
-  }*/
     firebase.auth().onAuthStateChanged(function(user) {
       if (user) {
         // User is signed in.
         console.log('si')
-        console.log("Correo lista: " + user.email)
-        var corre = (user.email);
-       // aparece();
 
-       
-        
-        /*
-        if (corre == '1@1.com') {
-          var reu = 'REU'
-          console.log('Distrito: ' + reu)
-          var distrito2 = document.getElementById('distrito2');
-          distrito2.innerHTML = "Retalhuleu"
-        } 
-        */
-
+        if (user.email === 'sanmartin@sanmartin.com') {
+          console.log("el usuario es valido")
+          console.log("correo del usuario: " + user.email)
+        } else {
+          //alert('usuario no admitido')
+          window.location = '/' 
+          
+        }
 
       } else {
         // No user is signed in.
         console.log('no')
-        alert('¡POR FAVOR INICIA SESIÓN!')
+        //alert('¡POR FAVOR INICIA SESIÓN!')
         window.location = '/' 
       }
     });
-
-    
-
-    const { distrito, cantidad, destino, fecha, personas, piloto, vehiculo } = this.state;
     return (
-
 
       <div className="animated slideInUpTiny animation-duration-3">
         <div className="m-5">
           <Grid container spacing={3}>
             <Grid className="mx-auto">
-              <div >
-              
+              <div>
+              <h4><Link to={`/detalle-solicitud-san-martin/${this.state.key}`} class="btn btn-primary">Volver a detalles de solicitud SAN MARTIN</Link></h4>
 			  </div>
 			  <div>
                 <h1 className="text-center font-weight-bold">
@@ -119,7 +128,19 @@ class Create extends Component {
               </div>
               <div className="mt-5">
                 <div>
-                                 
+
+                <TextField
+                  type="text"
+                  id="estadosoli"
+                  name="estadosoli"
+                  label="Estado de la solicitud:"
+                  disabled
+                  value={this.state.estadosoli}
+                  onChange={this.onChange}
+                  margin="normal"
+                  fullWidth
+                />
+
                 <TextField
                   type="text"
                   id="distrito"
@@ -133,16 +154,18 @@ class Create extends Component {
 
 
                   //value="asdfasdf"
-                  value="Huehuetenago"//{distrito}
+                  value={this.state.distrito}
                   onChange={this.onChange}
                   margin="normal"
                   fullWidth
                 />
-              
+
+                
+
 				<TextField
           id="destino"
           name="destino"
-                    value={destino}
+                    value={this.state.destino}
                     onChange={this.onChange}
                     fullWidth
                     type="text"
@@ -160,7 +183,8 @@ class Create extends Component {
                   <TextField
             id="vehiculo"
             name="vehiculo"
-          value={vehiculo}
+            value={this.state.vehiculo}
+          
           type="text"
           onChange={this.onChange}
                     fullWidth
@@ -181,7 +205,7 @@ class Create extends Component {
                     id="personas"
                     name="personas"
                     label="Personas que conforman la comision"
-                    value={personas}
+                    value={this.state.personas}
                     type="text"
                     onChange={this.onChange}
                     margin="normal"
@@ -200,7 +224,7 @@ class Create extends Component {
                   id="cantidad"
                   name="cantidad"
                   label="Cantidad de Combustible que Solicita"
-                  value={cantidad}
+                  value={this.state.cantidad}
                   
                   onChange={this.onChange}
                   margin="normal"
@@ -217,7 +241,7 @@ class Create extends Component {
                       label="Hora y Fecha"
                       type="date"
 					  InputLabelProps={{ shrink: true, }}
-                      value={fecha}
+                      value={this.state.fecha}
                       
           onChange={this.onChange}
                     />
@@ -226,7 +250,7 @@ class Create extends Component {
                     <TextField
             id="piloto"
             name="piloto"
-                      value={piloto}
+                      value={this.state.piloto}
                       type="text"
           onChange={this.onChange}
                       fullWidth
@@ -247,7 +271,7 @@ class Create extends Component {
               <div className="mt-5 d-flex justify-content-center">
                 <Fab variant="extended" color="primary" aria-label="add" onClick={this.onSubmit}>
                   <NavigationIcon />
-                  Enviar Solicitud
+                  Actualizar Solicitud
                 </Fab>
               </div>
               
@@ -260,9 +284,8 @@ class Create extends Component {
 
 
 
-
     );
   }
 }
 
-export default Create;
+export default EditarSanMartin;

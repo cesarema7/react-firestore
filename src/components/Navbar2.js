@@ -31,12 +31,72 @@ const NavBar2 = () => {
 
                     
 
+                    {/*
                     <Typography align="center" variant="h3" style={style}>
                         Bienvenido 
                     </Typography>
-                    {/*<div id="corre"></div>*/}
+                    <div id="corre"></div>*/}
 
-                    <Fab variant="extended" color="secondary" onClick={cerrar}>
+                    
+                    
+                    <script>
+                        window.onLoad=sesion() {
+    
+    firebase.auth().onAuthStateChanged(function(user) {
+        if (user) {
+          // User is signed in.
+          console.log('**********************')
+          console.log("Sesión iniciada con: " + user.email)
+          
+          var usuario = document.getElementById('usuario');
+          usuario.innerHTML = ('Hola: ' + user.email)
+          usuario.style.display = 'inline';  
+
+          var bienvenido = document.getElementById('bienvenido');
+          bienvenido.style.display = 'none';
+          
+              function activa() {
+                
+                    var contenido = document.getElementById('contenido');
+                    //contenido.innerHTML = "sesion iniciada"
+                    contenido.style.display = 'inline';
+                   // contenido.style.display = 'none';
+                
+              }
+              activa();
+          
+          
+        } else {
+          // No user is signed in.
+          
+          var contenido = document.getElementById('contenido');
+          //contenido.innerHTML = "sesion iniciada"
+          contenido.style.display = 'none';
+
+          var bienvenido = document.getElementById('bienvenido');
+          bienvenido.style.display = 'inline';
+
+          var usuario = document.getElementById('usuario');
+          usuario.style.display = 'none';
+
+          console.log('***********************')
+          console.log("Sesión NOO iniciada")
+        }
+      })
+
+}
+                    </script>
+
+                    <Typography id="bienvenido" align="center" variant="h3" style={style}>
+                        Bienvenido 
+                    </Typography>
+                  
+
+                    <Typography id="usuario" align="center" variant="h3" style={style} />
+
+                    {/* <button id="contenidoss"  type="button">Ocultar</button> */}
+
+                    <Fab id="contenido"  variant="extended" color="secondary" onClick={cerrar}>
                         Cerrar Sesión <ExitIcon/>
                     </Fab>
 
@@ -57,6 +117,25 @@ function cerrar(){
     })
 }
 
+
+/*function sesion() {
+    
+    firebase.auth().onAuthStateChanged(function(user) {
+        if (user) {
+          // User is signed in.
+          console.log('**********************')
+          console.log("Sesión iniciada con: " + user.email)
+        } else {
+          // No user is signed in.
+          console.log('***********************')
+          console.log("Sesión NOO iniciada")
+        }
+      });
+
+}*/
+
+
+//sesion();
  /*function correoU(){
     firebase.auth().onAuthStateChanged(function(user) {
         if (user) {

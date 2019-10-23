@@ -177,7 +177,7 @@ class Edit extends Component {
                   name="cantidad"
                   label="Cantidad de Combustible que Solicita"
                   value={this.state.cantidad}
-                  type="text"
+                  
                   onChange={this.onChange}
                   margin="normal"
                   fullWidth

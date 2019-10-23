@@ -16,26 +16,5 @@ const config = {
 firebase.initializeApp(config);
 
 firebase.firestore().settings(settings);
-//app.firestore().settings(settings);
-/*
-class Firebase {
 
-    constructor() {
-
-        
-         app.initializeApp(config)
-         app.firestore().settings(settings);
-         
-         this.auth = app.auth()
-         
-     }
-    
-    login(email, pass) {
-        //firebase login function
-        return this.auth.signInWithEmailAndPassword(email, pass)
-    }
-}*/
-
-
-//export default new Firebase()
 export default firebase;

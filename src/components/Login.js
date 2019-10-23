@@ -58,7 +58,7 @@ function Login(props) {
 		
 		<div>			
 			<div>
-				<Navbar/>
+				{/*<Navbar/>*/}
 			</div>
 			<main className={classes.main}>
 			
@@ -103,8 +103,40 @@ function Login(props) {
         var password = document.getElementById('password').value;
         firebase.auth().signInWithEmailAndPassword(email, password)
         .then(function(){
-            props.history.replace('/list')
-            alert('¡BIENVENIDO!')
+           // props.history.replace('/list')
+			alert('¡BIENVENIDO!')
+
+			if (email === 'reu@reu.com') {
+
+				props.history.replace('/lista-solicitudes-reu')
+				console.log('***********')
+				console.log('vista de reu: ' + email)
+				
+			} else {
+				if (email === 'sanmartin@sanmartin.com') {
+
+					props.history.replace('/lista-solicitudes-san-martin')
+					console.log('***********')
+					console.log('vista de san martin: ' + email)
+					
+				} else {
+					if (email === 'doc@doc.com') {
+						
+							props.history.replace('/lista-solicitudes-aprovadas')
+								//alert('en proceso')
+								console.log('***********')
+								console.log('vista de doctora jefa: ' + email)
+			
+						
+					} else {
+						if (email === 'apro@apro.com') {
+							props.history.replace('/lista-solicitudes-pendientes')
+								console.log('***********')
+								console.log('vista del que aprueba: ' + email)
+						}
+					}
+				}
+			} 
         })
         .catch(function(error) {
             // Handle Errors here.
@@ -114,20 +146,28 @@ function Login(props) {
             console.log(errorMessage);
             alert('Credenciales Incorrectas...      Intenta Nuevamente')
             // ...
-          });
+		  });
+		  
+		/*
+		  firebase.auth().currentUser 
+		  .then(function(){
+			  alert('No autorizado')
+			  props.history.replace('/')
+		  })
+		  .catch*/
 
-		firebase.auth().onAuthStateChanged(function(user) {
+/*AuthStateChanged(function(user) {
             if (user) {
                 console.log('siii')
-                aparece();
+                //aparece();
 
 
             }else{
                 console.log('noooo')
             }
         });
-    }
-
+    }*/
+/*
     function aparece(){
         var contenido = document.getElementById('contenido');
         contenido.innerHTML = "solo lo ve usuario activo"
@@ -139,9 +179,9 @@ function Login(props) {
             alert('No autorizado')
             props.history.replace('/')
         })
-    }
+    }*/
 
-
+	}
 }
 
 export default withRouter(withStyles(styles)(Login))

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import firebase from '../Firebase';
+import firebase from '../../Firebase';
 import { Link } from 'react-router-dom';
 import TextField from '@material-ui/core/TextField';
 import Grid from "@material-ui/core/Grid";
@@ -8,19 +8,20 @@ import InputAdornment from "@material-ui/core/InputAdornment";
 import Fab from "@material-ui/core/Fab";
 import NavigationIcon from "@material-ui/icons/Navigation";
 
-class Create extends Component {
+class CrearReu extends Component {
 
   constructor() {
     super();
-    this.ref = firebase.firestore().collection('solicitudes');
+    this.ref = firebase.firestore().collection('solicitudes-reu');
     this.state = {
-      distrito: 'Huehuetenango',
+      distrito: 'RETALHULEU',
       cantidad: '',
       destino: '',
       fecha: '',
       personas: '',
       piloto: '',
-      vehiculo: ''
+      vehiculo: '',
+      estadosoli: 'PENDIENTE'
     };
   }
   onChange = (e) => {
@@ -32,7 +33,7 @@ class Create extends Component {
   onSubmit = (e) => {
     e.preventDefault();
 
-    const { distrito, cantidad, destino, fecha, personas, piloto, vehiculo } = this.state;
+    const { distrito, cantidad, destino, fecha, personas, piloto, vehiculo, estadosoli } = this.state;
 
     this.ref.add({
       distrito,
@@ -41,18 +42,20 @@ class Create extends Component {
       fecha,
       personas,
       piloto,
-      vehiculo
+      vehiculo,
+      estadosoli
     }).then((docRef) => {
       this.setState({
-        distrito: 'Huehuetenango',
+        distrito: 'RETALHULEU',
         cantidad: '',
         destino: '',
         fecha: '',
         personas: '',
         piloto: '',
-        vehiculo: ''
+        vehiculo: '',
+        estadosoli: 'PENDIENTE'
       });
-      this.props.history.push("/list")
+      this.props.history.push("/lista-solicitudes-reu")
     })
     .catch((error) => {
       console.error("Error adding document: ", error);
@@ -63,42 +66,49 @@ class Create extends Component {
  
 
   render() {
-   /* function aparece(){
-      var distrito2 = document.getElementById('distrito2');
-      distrito2.innerHTML = "Retalhuleu"
+
+    /*var user2 =  firebase.auth().currentUser ;
+    console.log(user2)
+    
+    if (user2.email === 'reu@reu.com') {
+      console.log("el usuario es valido")
+      console.log("correo del usuario: " + user2.email)
+    } else {
+      alert('usuario no admitido')
+      window.location = '/' 
       
-  }*/
+    }*/
+
+   
     firebase.auth().onAuthStateChanged(function(user) {
       if (user) {
         // User is signed in.
         console.log('si')
         console.log("Correo lista: " + user.email)
-        var corre = (user.email);
-       // aparece();
-
        
-        
-        /*
-        if (corre == '1@1.com') {
-          var reu = 'REU'
-          console.log('Distrito: ' + reu)
-          var distrito2 = document.getElementById('distrito2');
-          distrito2.innerHTML = "Retalhuleu"
-        } 
-        */
+
+        if (user.email === 'reu@reu.com') {
+          console.log("el usuario es valido")
+          console.log("correo del usuario: " + user.email)
+        } else {
+          //alert('usuario no admitido')
+          window.location = '/' 
+          
+        }
+
 
 
       } else {
         // No user is signed in.
         console.log('no')
-        alert('¡POR FAVOR INICIA SESIÓN!')
+        //alert('¡POR FAVOR INICIA SESIÓN!')
         window.location = '/' 
       }
     });
 
     
 
-    const { distrito, cantidad, destino, fecha, personas, piloto, vehiculo } = this.state;
+    const {  cantidad, destino, fecha, personas, piloto, vehiculo } = this.state;
     return (
 
 
@@ -111,7 +121,7 @@ class Create extends Component {
 			  </div>
 			  <div>
                 <h1 className="text-center font-weight-bold">
-                  Solicitud de Combustible
+                  Solicitud de Combustible RETALHULEU
                 </h1>
                 <small className="d-flex justify-content-center font-italic">
                   Ingrese los datos para la Solicitud de Combustible
@@ -119,7 +129,20 @@ class Create extends Component {
               </div>
               <div className="mt-5">
                 <div>
-                                 
+
+                <TextField
+                  type="text"
+                  id="estadosoli"
+                  name="estadosoli"
+                  label="Estado de la solicitud:"
+                  disabled
+                  value="PENDIENTE"
+                  onChange={this.onChange}
+                  margin="normal"
+                  fullWidth
+                  
+                />
+
                 <TextField
                   type="text"
                   id="distrito"
@@ -133,7 +156,7 @@ class Create extends Component {
 
 
                   //value="asdfasdf"
-                  value="Huehuetenago"//{distrito}
+                  value="RETALHULEU"//{distrito}
                   onChange={this.onChange}
                   margin="normal"
                   fullWidth
@@ -167,7 +190,7 @@ class Create extends Component {
                     InputProps={{
                       startAdornment: (
                         <InputAdornment position="start">
-                          Vehiculo
+                          Vehiculo:
                         </InputAdornment>
                       )
                     }}
@@ -180,7 +203,7 @@ class Create extends Component {
                   <TextField
                     id="personas"
                     name="personas"
-                    label="Personas que conforman la comision"
+                    label="Personas que conforman la comision:"
                     value={personas}
                     type="text"
                     onChange={this.onChange}
@@ -199,7 +222,7 @@ class Create extends Component {
                   type="number"
                   id="cantidad"
                   name="cantidad"
-                  label="Cantidad de Combustible que Solicita"
+                  label="Cantidad de Combustible que Solicita:"
                   value={cantidad}
                   
                   onChange={this.onChange}
@@ -265,4 +288,4 @@ class Create extends Component {
   }
 }
 
-export default Create;
+export default CrearReu;
