@@ -6,22 +6,22 @@ import DIcon from '@material-ui/icons/Delete';
 import ListIcon from '@material-ui/icons/ListAlt';
 import OkIcon from '@material-ui/icons/CheckCircle';
 
-class DetalleSanMartin extends Component {
+class DetalleSanFelipe extends Component {
 
   constructor(props) {
     super(props);
     this.state = {
-      solicitudsanmartin: {},
+      solicitudsanfelipe: {},
       key: ''
     };
   }
 
   componentDidMount() {
-    const ref = firebase.firestore().collection('solicitudes-san-martin').doc(this.props.match.params.id);
+    const ref = firebase.firestore().collection('solicitudes-san-felipe').doc(this.props.match.params.id);
     ref.get().then((doc) => {
       if (doc.exists) {
         this.setState({
-          solicitudsanmartin: doc.data(),
+          solicitudsanfelipe: doc.data(),
           key: doc.id,
           isLoading: false
         });
@@ -32,18 +32,18 @@ class DetalleSanMartin extends Component {
   }
 
   delete(id){
-    firebase.firestore().collection('solicitudes-san-martin').doc(id).delete().then(() => {
+    firebase.firestore().collection('solicitudes-san-felipe').doc(id).delete().then(() => {
       console.log("Document successfully deleted!");
-      this.props.history.push("/lista-solicitudes-san-martin")
+      this.props.history.push("/lista-solicitudes-san-felipe")
     }).catch((error) => {
       console.error("Error removing document: ", error);
     });
   }
 
   aprobar(id){
-    firebase.firestore().collection('solicitudes-san-martin').doc(id).update({estadosoli: 'APROBADO'}).then(() => {
+    firebase.firestore().collection('solicitudes-san-felipe').doc(id).update({estadosoli: 'APROBADO'}).then(() => {
       console.log("Document successfully actualizado!");
-      this.props.history.push("/lista-solicitudes-aprobadas")
+      this.props.history.push("/lista-solicitudes-pendientes")
     }).catch((error) => {
       console.error("Error actualizando document: ", error);
     });    
@@ -56,7 +56,7 @@ class DetalleSanMartin extends Component {
         console.log('si')
 
 
-        if (user.email === 'sanmartin@sanmartin.com' || user.email === 'apro@apro.com') {
+        if (user.email === 'sanfelipe@sanfelipe.com' || user.email === 'apro@apro.com') {
           console.log("el usuario es valido")
           console.log("correo del usuario: " + user.email)
 
@@ -106,31 +106,31 @@ class DetalleSanMartin extends Component {
           <div class="panel-heading">
             <div className="mt-3">
             <h4><Link id="btn-ls" to="/lista-solicitudes-pendientes" class="btn btn-primary">Listado de solicitudes<ListIcon/> </Link></h4>
-            <h4><Link id="btn-lsr" to="/lista-solicitudes-san-martin" class="btn btn-primary">Listado de solicitudes SAN MARTIN<ListIcon/> </Link></h4>
+            <h4><Link id="btn-lsr" to="/lista-solicitudes-san-felipe" class="btn btn-primary">Listado de solicitudes SAN FELIPE<ListIcon/> </Link></h4>
             </div>
           
             <h3 class="panel-title">
-              {this.state.solicitudsanmartin.fecha}
+              {this.state.solicitudsanfelipe.fecha}
             </h3>
           </div>
           <div class="panel-body">
             <dl>
               <dt>Estado de la solicitud:</dt>
-              <dd>{this.state.solicitudsanmartin.estadosoli}</dd>
+              <dd>{this.state.solicitudsanfelipe.estadosoli}</dd>
               <dt>Distrito:</dt>
-              <dd>{this.state.solicitudsanmartin.distrito}</dd>
+              <dd>{this.state.solicitudsanfelipe.distrito}</dd>
               <dt>Destino:</dt>
-              <dd>{this.state.solicitudsanmartin.destino}</dd>
+              <dd>{this.state.solicitudsanfelipe.destino}</dd>
               <dt>Piloto:</dt>
-              <dd>{this.state.solicitudsanmartin.piloto}</dd>
+              <dd>{this.state.solicitudsanfelipe.piloto}</dd>
               <dt>Vehículo:</dt>
-              <dd>{this.state.solicitudsanmartin.vehiculo}</dd>
+              <dd>{this.state.solicitudsanfelipe.vehiculo}</dd>
               <dt>Personas que conforman la comision:</dt>
-              <dd>{this.state.solicitudsanmartin.personas}</dd>
+              <dd>{this.state.solicitudsanfelipe.personas}</dd>
               <dt>Cantidad de Combustible que Solicita:</dt>
-              <dd>{this.state.solicitudsanmartin.cantidad}</dd>
+              <dd>{this.state.solicitudsanfelipe.cantidad}</dd>
             </dl>
-            <Link id="btn-editar" to={`/editar-solicitud-san-martin/${this.state.key}`} class="btn btn-warning">Editar <EIcon /> </Link>&nbsp;
+            <Link id="btn-editar" to={`/editar-solicitud-san-felipe/${this.state.key}`} class="btn btn-warning">Editar <EIcon /> </Link>&nbsp;
             <button id="btn-eliminar" onClick={this.delete.bind(this, this.state.key)} class="btn btn-danger">Eliminar <DIcon /> </button>
             <button id="btn-aprobado" onClick={this.aprobar.bind(this, this.state.key)} class="btn btn-success">Aprobar <OkIcon /> </button>
           </div>
@@ -140,4 +140,4 @@ class DetalleSanMartin extends Component {
   }
 }
 
-export default DetalleSanMartin;
+export default DetalleSanFelipe;

@@ -23,9 +23,14 @@ import CrearSanMartin from './components/SanMartin/CrearSanMartin';
 import DetalleSanMartin from './components/SanMartin/DetalleSanMartin';
 import EditarSanMartin from './components/SanMartin/EditarSanMartin';
 
-import { ListaReuApro, ListaSanMartinApro } from './components/Pendientes/ListaSolicitudesPendientes';
+import ListaSanFelipe from './components/SanFelipe/ListaSanFelipe';
+import CrearSanFelipe from './components/SanFelipe/CrearSanFelipe';
+import DetalleSanFelipe from './components/SanFelipe/DetalleSanFelipe';
+import EditarSanFelipe from './components/SanFelipe/EditarSanFelipe';
 
-import { ListaReuOk, ListaSanMartinOk } from './components/Aprobadas/ListaSolicitudesAprobadas'
+import { ListaReuApro, ListaSanMartinApro, ListaSanFelipeApro } from './components/Pendientes/ListaSolicitudesPendientes';
+
+import { ListaReuOk, ListaSanMartinOk, ListaSanFelipeOk } from './components/Aprobadas/ListaSolicitudesAprobadas'
 
 
 ReactDOM.render(
@@ -51,11 +56,18 @@ ReactDOM.render(
         <Route path='/detalle-solicitud-san-martin/:id' component={DetalleSanMartin} />
         <Route path='/editar-solicitud-san-martin/:id' component={EditarSanMartin} />
 
+        <Route path='/lista-solicitudes-san-felipe' component={ListaSanFelipe} />
+        <Route path='/nueva-solicitud-san-felipe' component={CrearSanFelipe} />
+        <Route path='/detalle-solicitud-san-felipe/:id' component={DetalleSanFelipe} />
+        <Route path='/editar-solicitud-san-felipe/:id' component={EditarSanFelipe} />
+
         <Route path='/lista-solicitudes-pendientes' component={ListaReuApro}/>
         <Route path='/lista-solicitudes-pendientes' component={ListaSanMartinApro}/>
+        <Route path='/lista-solicitudes-pendientes' component={ListaSanFelipeApro}/>
 
         <Route path='/lista-solicitudes-aprovadas' component={ListaReuOk} />
         <Route path='/lista-solicitudes-aprovadas' component={ListaSanMartinOk} />
+        <Route path='/lista-solicitudes-aprovadas' component={ListaSanFelipeOk} />
         </Container>
        
 

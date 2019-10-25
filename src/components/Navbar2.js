@@ -39,8 +39,7 @@ const NavBar2 = () => {
 
                     
                     
-                    <script>
-                        window.onLoad=sesion() {
+                    <script> window.onLoad=sesion() {
     
     firebase.auth().onAuthStateChanged(function(user) {
         if (user) {
@@ -55,22 +54,12 @@ const NavBar2 = () => {
           var bienvenido = document.getElementById('bienvenido');
           bienvenido.style.display = 'none';
           
-              function activa() {
-                
-                    var contenido = document.getElementById('contenido');
-                    //contenido.innerHTML = "sesion iniciada"
-                    contenido.style.display = 'inline';
-                   // contenido.style.display = 'none';
-                
-              }
-              activa();
-          
+          var contenido = document.getElementById('contenido');
+          contenido.style.display = 'inline';
           
         } else {
           // No user is signed in.
-          
           var contenido = document.getElementById('contenido');
-          //contenido.innerHTML = "sesion iniciada"
           contenido.style.display = 'none';
 
           var bienvenido = document.getElementById('bienvenido');
@@ -83,9 +72,7 @@ const NavBar2 = () => {
           console.log("Sesión NOO iniciada")
         }
       })
-
-}
-                    </script>
+} </script>
 
                     <Typography id="bienvenido" align="center" variant="h3" style={style}>
                         Bienvenido 

@@ -3,13 +3,13 @@ import { Link } from 'react-router-dom';
 
 import firebase from '../../Firebase';
 
-
+//    .where("estadosoli", "==", "APROBADO")
 
 
 class ListaReuOk extends Component {
   constructor(props) {
     super(props);
-    this.ref = firebase.firestore().collection('solicitudes-reu');
+    this.ref = firebase.firestore().collection('solicitudes-reu').where("estadosoli", "==", "APROBADO");
     this.unsubscribe = null;
     this.state = {
       solicitudesreu: []
@@ -40,7 +40,6 @@ class ListaReuOk extends Component {
 
   }
   
-  
 
   render() {
     
@@ -67,6 +66,21 @@ class ListaReuOk extends Component {
             tOk.style.display = 'none';
           }*/
 
+          //var docRef = db.collection("solicitudes-reu").doc();
+         /* var docRef = firebase.firestore().collection('solicitudes-reu').doc();
+
+          docRef.get().then(function(doc) {
+              if (doc.exists) {
+                  //console.log("Document data:", doc.data());
+                  console.log("estados: " , doc.data());
+              } else {
+                  // doc.data() will be undefined in this case
+                  console.log("No such document!");
+              }
+          }).catch(function(error) {
+              console.log("Error getting document:", error);
+          });*/
+
 
         } else {
           //alert('usuario no admitido')
@@ -84,6 +98,22 @@ class ListaReuOk extends Component {
       }
     });
 
+    var apro = this.ref.where("estadosoli", "==", "APROBADO")
+
+    apro
+    .get()
+    .then(function(querySnapshot) {
+        querySnapshot.forEach(function(doc) {
+            // doc.data() is never undefined for query doc snapshots
+            console.log(doc.id, " => ", doc.data());
+        });
+    })
+    .catch(function(error) {
+        console.log("Error obteniendo el documento: ", error);
+    });
+
+    
+
     
     return (
       
@@ -91,7 +121,7 @@ class ListaReuOk extends Component {
       <div id="tOk" class="container">
         
         <div class="panel panel-default">
-          <div class="panel-heading">
+          <div align="center" class="panel-heading">
             <h3 class="panel-title">
               solicitudes de combustible RETALHULEU
             </h3>
@@ -100,7 +130,7 @@ class ListaReuOk extends Component {
           <div class="panel-body">
                     
             <table class="table table-stripe">
-              <thead>
+              <thead align="center">
                 <tr>
                   <th>Fecha</th>
                   <th>Destino</th>
@@ -108,8 +138,10 @@ class ListaReuOk extends Component {
                   <th>Estado de solicitud</th>
                 </tr>
               </thead>
-              <tbody>
+              <tbody align="center">
                 {this.state.solicitudesreu.map(solicitudreu =>
+                
+                //console.log("estado de la soli: " + solicitudreu.estadosoli)
                   <tr>
                     <td><Link to={`/detalle-solicitud-reu/${solicitudreu.key}`}>{solicitudreu.fecha}</Link></td>
                     <td>{solicitudreu.destino}</td>
@@ -135,7 +167,7 @@ class ListaReuOk extends Component {
 class ListaSanMartinOk extends Component {
     constructor(props) {
       super(props);
-      this.ref = firebase.firestore().collection('solicitudes-san-martin');
+      this.ref = firebase.firestore().collection('solicitudes-san-martin').where("estadosoli", "==", "APROBADO");
       this.unsubscribe = null;
       this.state = {
         solicitudessanmartin: []
@@ -198,7 +230,7 @@ class ListaSanMartinOk extends Component {
         <div class="container">
           
           <div class="panel panel-default">
-            <div class="panel-heading">
+            <div align="center" class="panel-heading">
               <h3 class="panel-title">
                 solicitudes de combustible SAN MARTIN
               </h3>
@@ -207,7 +239,7 @@ class ListaSanMartinOk extends Component {
             <div class="panel-body">
                       
               <table class="table table-stripe">
-                <thead>
+                <thead align="center">
                   <tr>
                     <th>Fecha</th>
                     <th>Destino</th>
@@ -215,7 +247,7 @@ class ListaSanMartinOk extends Component {
                     <th>Estado de solicitud</th>
                   </tr>
                 </thead>
-                <tbody>
+                <tbody align="center">
                   {this.state.solicitudessanmartin.map(solicitudsanmartin =>
                     <tr>
                       <td><Link to={`/detalle-solicitud-san-martin/${solicitudsanmartin.key}`}>{solicitudsanmartin.fecha}</Link></td>
@@ -233,8 +265,112 @@ class ListaSanMartinOk extends Component {
       );
     }
   }
+
+  class ListaSanFelipeOk extends Component {
+    constructor(props) {
+      super(props);
+      this.ref = firebase.firestore().collection('solicitudes-san-felipe').where("estadosoli", "==", "APROBADO");
+      this.unsubscribe = null;
+      this.state = {
+        solicitudessanfelipe: []
+      };
+    }
+  
+    onCollectionUpdate = (querySnapshot) => {
+      const solicitudessanfelipe = [];
+      querySnapshot.forEach((doc) => {
+        const { fecha, destino, distrito, estadosoli } = doc.data();
+        solicitudessanfelipe.push({
+          key: doc.id,
+          doc, // DocumentSnapshot
+          fecha,
+          destino,
+          distrito,
+          estadosoli,
+          
+        });
+      });
+      this.setState({
+        solicitudessanfelipe
+     });
+    }
+  
+    componentDidMount() {
+      this.unsubscribe = this.ref.onSnapshot(this.onCollectionUpdate);
+      
+    }
+    
+    
+  
+    render() {
+      firebase.auth().onAuthStateChanged(function(user) {
+        if (user) {
+          // User is signed in.
+          console.log('si')
+          console.log("Correo lista: " + user.email)
+          var corre = (user.email);
+  
+  
+          if (corre === 'doc@doc.com') {
+            console.log('usuario permitido')
+          } else {
+            window.location = '/'   
+          }
+  
+  
+        } else {
+          // No user is signed in.
+          console.log('no')
+          //alert('¡POR FAVOR INICIA SESIÓN!')
+          window.location = '/' 
+        }
+      }); 
+      return (
+        
+        <div>
+          {/*<Navbar2/>*/}
+        <div class="container">
+          
+          <div class="panel panel-default">
+            <div align="center" class="panel-heading">
+              <h3 class="panel-title">
+                solicitudes de combustible SAN FELIPE
+              </h3>
+            </div>
+            
+            <div class="panel-body">
+                      
+              {/*<h4><Link to="/create">Nueva Solicitud <AIcon /> </Link></h4>*/}
+              <table class="table table-stripe">
+                <thead align="center">
+                  <tr>
+                    <th>Fecha</th>
+                    <th>Destino</th>
+                    <th>Distrito</th>
+                    <th>Estado de solicitud</th>
+                  </tr>
+                </thead>
+                <tbody align="center">
+                  {this.state.solicitudessanfelipe.map(solicitudsanfelipe =>
+                    <tr>
+                      <td><Link to={`/detalle-solicitud-san-felipe/${solicitudsanfelipe.key}`}>{solicitudsanfelipe.fecha}</Link></td>
+                      <td>{solicitudsanfelipe.destino}</td>
+                      <td>{solicitudsanfelipe.distrito}</td>
+                      <td>{solicitudsanfelipe.estadosoli}</td>
+                    </tr>
+                  )}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        </div>
+      );
+    }
+  }
   
 export {
     ListaReuOk,
     ListaSanMartinOk,
+    ListaSanFelipeOk,
 }

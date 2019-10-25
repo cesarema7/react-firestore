@@ -137,6 +137,11 @@ function Login(props) {
 					}
 				}
 			} 
+			if (email === 'sanfelipe@sanfelipe.com') {
+				props.history.replace('/lista-solicitudes-san-felipe')
+				console.log('***********')
+				console.log('vista de san martin: ' + email)
+			}
         })
         .catch(function(error) {
             // Handle Errors here.
