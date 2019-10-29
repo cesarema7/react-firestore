@@ -7,7 +7,7 @@ import InputAdornment from "@material-ui/core/InputAdornment";
 import Fab from "@material-ui/core/Fab";
 import NavigationIcon from "@material-ui/icons/Navigation";
 
-class EditarReu extends Component {
+class EditarSanandres extends Component {
 
   constructor(props) {
     super(props);
@@ -29,24 +29,24 @@ class EditarReu extends Component {
   }
 
   componentDidMount() {
-    const ref = firebase.firestore().collection('solicitudes-reu').doc(this.props.match.params.id);
+    const ref = firebase.firestore().collection('solicitudes-sanandres').doc(this.props.match.params.id);
     ref.get().then((doc) => {
       if (doc.exists) {
-        const solicitudreu = doc.data();
+        const solicitudessanandres = doc.data();
         this.setState({
           key: doc.id,
-          estadosoli: solicitudreu.estadosoli,
-          distrito: solicitudreu.distrito,
-          cantidad: solicitudreu.cantidad,
-          destino: solicitudreu.destino,
-          fechaS: solicitudreu.fechaS,
-          personas: solicitudreu.personas,
-          piloto: solicitudreu.piloto,
-          vehiculo: solicitudreu.vehiculo,
-          placa: solicitudreu.placa,
-          detalle: solicitudreu.detalle,
-          fechaR: solicitudreu.fechaR,
-          autorizada: solicitudreu.autorizada
+          estadosoli: solicitudessanandres.estadosoli,
+          distrito: solicitudessanandres.distrito,
+          cantidad: solicitudessanandres.cantidad,
+          destino: solicitudessanandres.destino,
+          fechaS: solicitudessanandres.fechaS,
+          personas: solicitudessanandres.personas,
+          piloto: solicitudessanandres.piloto,
+          vehiculo: solicitudessanandres.vehiculo,
+          placa: solicitudessanandres.placa,
+          detalle: solicitudessanandres.detalle,
+          fechaR: solicitudessanandres.fechaR,
+          autorizada: solicitudessanandres.autorizada
         });
       } else {
         console.log("No such document!");
@@ -57,7 +57,7 @@ class EditarReu extends Component {
   onChange = (e) => {
     const state = this.state
     state[e.target.name] = e.target.value;
-    this.setState({solicitudreu:state});
+    this.setState({solicitudessanandres:state});
   }
 
   onSubmit = (e) => {
@@ -65,7 +65,7 @@ class EditarReu extends Component {
 
     const { estadosoli, distrito, cantidad, destino, fechaS, personas, piloto, vehiculo, placa, detalle, fechaR, autorizada } = this.state;
 
-    const updateRef = firebase.firestore().collection('solicitudes-reu').doc(this.state.key);
+    const updateRef = firebase.firestore().collection('solicitudes-sanandres').doc(this.state.key);
     updateRef.set({
       estadosoli,
       distrito,
@@ -96,7 +96,7 @@ class EditarReu extends Component {
         autorizada: ''
       });
       //this.props.history.push("/show/"+this.props.match.params.id)
-      this.props.history.push("/lista-solicitudes-retalhuleu")
+      this.props.history.push("/lista-solicitudes-san-andres-villa-seca")
     })
     .catch((error) => {
       console.error("Error adding document: ", error);
@@ -112,7 +112,7 @@ class EditarReu extends Component {
         console.log("Correo lista: " + user.email)
        
 
-        if (user.email === 'csreumspas@hotmail.com') {
+        if (user.email === 'distritos.a.v.s.10reu@hotmail.com') {
           console.log("el usuario es valido")
           console.log("correo del usuario: " + user.email)
         } else {
@@ -138,7 +138,7 @@ class EditarReu extends Component {
           <Grid container spacing={3}>
             <Grid className="mx-auto">
               <div>
-              <h4><Link to={`/detalle-solicitud-retalhuleu/${this.state.key}`} class="btn btn-primary">Volver a detalles de solicitud RETALHULEU</Link></h4>
+              <h4><Link to={`/detalle-solicitud-san-andres-villa-seca/${this.state.key}`} class="btn btn-primary">Volver a detalles de solicitud SAN ANDRÉS VILLA SECA</Link></h4>
 			  </div>
 			  <div>
                 <h1 className="text-center font-weight-bold">
@@ -377,4 +377,4 @@ class EditarReu extends Component {
   }
 }
 
-export default EditarReu;
+export default EditarSanandres;

@@ -1,28 +1,24 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-
 import firebase from '../../Firebase';
-
 import AIcon from '@material-ui/icons/Add';
-
 import Fab from '@material-ui/core/Fab';
 
-
-class ListaSanMartin extends Component {
+class ListaCblanco extends Component {
   constructor(props) {
     super(props);
-    this.ref = firebase.firestore().collection('solicitudes-san-martin');
+    this.ref = firebase.firestore().collection('solicitudes-cblanco');
     this.unsubscribe = null;
     this.state = {
-      solicitudessanmartin: []
+      solicitudescblanco: []
     };
   }
 
   onCollectionUpdate = (querySnapshot) => {
-    const solicitudessanmartin = [];
+    const solicitudescblanco = [];
     querySnapshot.forEach((doc) => {
       const { fechaS, destino, distrito, estadosoli } = doc.data();
-      solicitudessanmartin.push({
+      solicitudescblanco.push({
         key: doc.id,
         doc, // DocumentSnapshot
         fechaS,
@@ -33,7 +29,7 @@ class ListaSanMartin extends Component {
       });
     });
     this.setState({
-      solicitudessanmartin
+      solicitudescblanco
    });
   }
 
@@ -45,6 +41,50 @@ class ListaSanMartin extends Component {
   
 
   render() {
+    
+    firebase.auth().onAuthStateChanged(function(user) {
+      if (user) {
+        // User is signed in.
+        console.log('si')
+        console.log("Correo lista: " + user.email)
+       
+
+        if (user.email === 'dcaballoblanco2013@gmail.com') {
+          console.log("el usuario es valido")
+          console.log("correo del usuario: " + user.email)
+        } else {
+          //alert('usuario no admitido')
+          window.location = '/' 
+          
+        }
+
+
+
+      } else {
+        // No user is signed in.
+        console.log('no')
+        //alert('¡POR FAVOR INICIA SESIÓN!')
+        window.location = '/' 
+      }
+    });
+
+    /*var user =  firebase.auth().currentUser ;
+    if (user.email === 'reu@reu.com') {
+      console.log("el usuario es valido")
+      console.log("correo del usuario: " + user.email)
+    } else {
+      alert('usuario no admitido')
+      window.location = '/' 
+      
+    }*/
+      /*
+		  .then(function(){
+			  alert('No autorizado')
+			  props.history.replace('/')
+		  })
+      .catch
+      
+
     firebase.auth().onAuthStateChanged(function(user) {
       if (user) {
         // User is signed in.
@@ -53,7 +93,7 @@ class ListaSanMartin extends Component {
         var corre = (user.email);
 
 
-        if (corre === 'puestosanmartin@gmail.com') {
+        if (corre == 'reu@reu.com') {
           console.log('usuario permitido')
         } else {
           window.location = '/'   
@@ -63,10 +103,10 @@ class ListaSanMartin extends Component {
       } else {
         // No user is signed in.
         console.log('no')
-        //alert('¡POR FAVOR INICIA SESIÓN!')
+        alert('¡POR FAVOR INICIA SESIÓN!')
         window.location = '/' 
       }
-    }); 
+    }); */
     return (
       
       <div>
@@ -76,12 +116,12 @@ class ListaSanMartin extends Component {
         <div class="panel panel-default">
           <div class="panel-heading">
             <h3 class="panel-title">
-              solicitudes de combustible SAN MARTÍN ZAPOTITLÁN
+              solicitudes de combustible CABALLO BLANCO
             </h3>
           </div>
           
           <div class="panel-body">
-                    <Fab variant="extended" color="primary" href="https://control-ambulancias-d69ec.firebaseapp.com/nueva-solicitud-san-martin-zapotitlan">
+                    <Fab variant="extended" color="primary" href="https://control-ambulancias-d69ec.firebaseapp.com/nueva-solicitud-caballo-blanco">
                         Nueva Solicitud  <AIcon /> 
                     </Fab>
             {/*<h4><Link to="/create">Nueva Solicitud <AIcon /> </Link></h4>*/}
@@ -95,12 +135,12 @@ class ListaSanMartin extends Component {
                 </tr>
               </thead>
               <tbody>
-                {this.state.solicitudessanmartin.map(solicitudsanmartin =>
+                {this.state.solicitudescblanco.map(solicitudescblanco =>
                   <tr>
-                    <td><Link to={`/detalle-solicitud-san-martin-zapotitlan/${solicitudsanmartin.key}`}>{solicitudsanmartin.fechaS}</Link></td>
-                    <td>{solicitudsanmartin.destino}</td>
-                    <td>{solicitudsanmartin.distrito}</td>
-                    <td>{solicitudsanmartin.estadosoli}</td>
+                    <td><Link to={`/detalle-solicitud-caballo-blanco/${solicitudescblanco.key}`}>{solicitudescblanco.fechaS}</Link></td>
+                    <td>{solicitudescblanco.destino}</td>
+                    <td>{solicitudescblanco.distrito}</td>
+                    <td>{solicitudescblanco.estadosoli}</td>
                   </tr>
                 )}
               </tbody>
@@ -114,4 +154,4 @@ class ListaSanMartin extends Component {
 }
 
 
-export default ListaSanMartin;
+export default ListaCblanco;

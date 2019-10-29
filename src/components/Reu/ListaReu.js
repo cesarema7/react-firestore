@@ -21,11 +21,11 @@ class ListaReu extends Component {
   onCollectionUpdate = (querySnapshot) => {
     const solicitudesreu = [];
     querySnapshot.forEach((doc) => {
-      const { fecha, destino, distrito, estadosoli } = doc.data();
+      const { fechaS, destino, distrito, estadosoli } = doc.data();
       solicitudesreu.push({
         key: doc.id,
         doc, // DocumentSnapshot
-        fecha,
+        fechaS,
         destino,
         distrito,
         estadosoli,
@@ -53,7 +53,7 @@ class ListaReu extends Component {
         console.log("Correo lista: " + user.email)
        
 
-        if (user.email === 'reu@reu.com') {
+        if (user.email === 'csreumspas@hotmail.com') {
           console.log("el usuario es valido")
           console.log("correo del usuario: " + user.email)
         } else {
@@ -120,19 +120,19 @@ class ListaReu extends Component {
         <div class="panel panel-default">
           <div class="panel-heading">
             <h3 class="panel-title">
-              solicitud de combustible RETALHULEU
+              solicitudes de combustible RETALHULEU
             </h3>
           </div>
           
           <div class="panel-body">
-                    <Fab variant="extended" color="primary" href="http://localhost:3000/nueva-solicitud-reu">
+                    <Fab variant="extended" color="primary" href="https://control-ambulancias-d69ec.firebaseapp.com/nueva-solicitud-retalhuleu">
                         Nueva Solicitud  <AIcon /> 
                     </Fab>
             {/*<h4><Link to="/create">Nueva Solicitud <AIcon /> </Link></h4>*/}
             <table class="table table-stripe">
               <thead>
                 <tr>
-                  <th>Fecha</th>
+                  <th>Fecha y Hora de Salida</th>
                   <th>Destino</th>
                   <th>Distrito</th>
                   <th>Estado de solicitud</th>
@@ -141,7 +141,7 @@ class ListaReu extends Component {
               <tbody>
                 {this.state.solicitudesreu.map(solicitudreu =>
                   <tr>
-                    <td><Link to={`/detalle-solicitud-reu/${solicitudreu.key}`}>{solicitudreu.fecha}</Link></td>
+                    <td><Link to={`/detalle-solicitud-retalhuleu/${solicitudreu.key}`}>{solicitudreu.fechaS}</Link></td>
                     <td>{solicitudreu.destino}</td>
                     <td>{solicitudreu.distrito}</td>
                     <td>{solicitudreu.estadosoli}</td>

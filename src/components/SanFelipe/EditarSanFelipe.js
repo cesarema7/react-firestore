@@ -17,10 +17,14 @@ class EditarSanFelipe extends Component {
       distrito: '',
       cantidad: '',
       destino: '',
-      fecha: '',
+      fechaS: '',
       personas: '',
       piloto: '',
-      vehiculo: ''
+      vehiculo: '',
+      placa: '',
+      detalle: '',
+      fechaR: '',
+      autorizada: ''
     };
   }
 
@@ -35,10 +39,14 @@ class EditarSanFelipe extends Component {
           distrito: solicitudsanfelipe.distrito,
           cantidad: solicitudsanfelipe.cantidad,
           destino: solicitudsanfelipe.destino,
-          fecha: solicitudsanfelipe.fecha,
+          fechaS: solicitudsanfelipe.fechaS,
           personas: solicitudsanfelipe.personas,
           piloto: solicitudsanfelipe.piloto,
-          vehiculo: solicitudsanfelipe.vehiculo
+          vehiculo: solicitudsanfelipe.vehiculo,
+          placa: solicitudsanfelipe.placa,
+          detalle: solicitudsanfelipe.detalle,
+          fechaR: solicitudsanfelipe.fechaR,
+          autorizada: solicitudsanfelipe.autorizada
         });
       } else {
         console.log("No such document!");
@@ -55,7 +63,7 @@ class EditarSanFelipe extends Component {
   onSubmit = (e) => {
     e.preventDefault();
 
-    const { estadosoli, distrito, cantidad, destino, fecha, personas, piloto, vehiculo } = this.state;
+    const { estadosoli, distrito, cantidad, destino, fechaS, personas, piloto, vehiculo, placa, detalle, fechaR, autorizada } = this.state;
 
     const updateRef = firebase.firestore().collection('solicitudes-san-felipe').doc(this.state.key);
     updateRef.set({
@@ -63,10 +71,14 @@ class EditarSanFelipe extends Component {
       distrito,
       cantidad,
       destino,
-      fecha,
+      fechaS,
       personas,
       piloto,
-      vehiculo
+      vehiculo,
+      placa,
+      detalle,
+      fechaR,
+      autorizada
     }).then((docRef) => {
       this.setState({
         key: '',
@@ -74,10 +86,14 @@ class EditarSanFelipe extends Component {
         distrito: '',
         cantidad: '',
         destino: '',
-        fecha: '',
+        fechaS: '',
         personas: '',
         piloto: '',
-        vehiculo: ''
+        vehiculo: '',
+        placa: '',
+        detalle: '',
+        fechaR: '',
+        autorizada: ''
       });
       //this.props.history.push("/show/"+this.props.match.params.id)
       this.props.history.push("/lista-solicitudes-san-felipe")
@@ -93,7 +109,7 @@ class EditarSanFelipe extends Component {
         // User is signed in.
         console.log('si')
 
-        if (user.email === 'sanfelipe@sanfelipe.com') {
+        if (user.email === 'sanfelipedasreu@gmail.com') {
           console.log("el usuario es valido")
           console.log("correo del usuario: " + user.email)
         } else {
@@ -198,6 +214,18 @@ class EditarSanFelipe extends Component {
                   >
                    
                   </TextField>
+
+                  <TextField
+                    id="placa"
+                    name="placa"
+                    label="Placa del vehículo: "
+                    value={this.state.placa}
+                    type="text"
+                    onChange={this.onChange}
+                    margin="normal"
+                    fullWidth
+                  />
+
                 </div>
 
                 <div className="mt-1">
@@ -223,25 +251,40 @@ class EditarSanFelipe extends Component {
                   type="number"
                   id="cantidad"
                   name="cantidad"
-                  label="Cantidad de Combustible que Solicita"
+                  label="Cantidad de Combustible que Solicita en Quetzales: "
                   value={this.state.cantidad}
                   
                   onChange={this.onChange}
                   margin="normal"
                   fullWidth
                 />
+
+                <TextField
+                  type="text"
+                  id="detalle"
+                  name="detalle"
+                  label="Detalle de comisión: "
+                  value={this.state.detalle}
+                  
+                  onChange={this.onChange}
+                  margin="normal"
+                  fullWidth
+                />
+
               </div>
 
               <div className="mt-4">
+              <h6>Fecha y Hora de Salida / Regreso</h6>
                 <Grid container justify="center">
+                  
                   <Grid item xs={5}>
                     <TextField
-                      id="fecha"
-                      name="fecha"
-                      label="Hora y Fecha"
-                      type="date"
+                      id="fechaS"
+                      name="fechaS"
+                      label="Salida: "
+                      type="datetime-local"
 					  InputLabelProps={{ shrink: true, }}
-                      value={this.state.fecha}
+                      value={this.state.fechaS}
                       
           onChange={this.onChange}
                     />
@@ -268,6 +311,46 @@ class EditarSanFelipe extends Component {
                   </Grid>
                 </Grid>
               </div>
+
+              <div className="mt-4">
+                <Grid container justify="center">
+                  <Grid item xs={5}>
+                    <TextField
+                      id="fechaR"
+                      name="fechaR"
+                      label="Retorno: "
+                      type="date"
+					  InputLabelProps={{ shrink: true, }}
+                      value={this.state.fechaR}
+                      
+          onChange={this.onChange}
+                    />
+                  </Grid>
+                  
+                  <Grid item xs={5}>
+                    <TextField
+            id="autorizada"
+            name="autorizada"
+                      value={this.state.autorizada}
+                      type="text"
+          onChange={this.onChange}
+                      fullWidth
+                      InputProps={{
+                        startAdornment: (
+                          <InputAdornment position="start">
+                            Vo.Bo:
+                          </InputAdornment>
+                        )
+                      }}
+                      className="mt-3"
+                    >
+                      
+                    </TextField>
+                  </Grid>
+                  
+                </Grid>
+              </div>
+
               <div className="mt-5 d-flex justify-content-center">
                 <Fab variant="extended" color="primary" aria-label="add" onClick={this.onSubmit}>
                   <NavigationIcon />

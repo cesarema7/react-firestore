@@ -17,11 +17,15 @@ class CrearSanFelipe extends Component {
       distrito: 'SAN FELIPE',
       cantidad: '',
       destino: '',
-      fecha: '',
+      fechaS: '',
       personas: '',
       piloto: '',
       vehiculo: '',
-      estadosoli: 'PENDIENTE'
+      estadosoli: 'PENDIENTE',
+      placa: '',
+      detalle: '',
+      fechaR: '',
+      autorizada: ''
     };
   }
   onChange = (e) => {
@@ -33,27 +37,36 @@ class CrearSanFelipe extends Component {
   onSubmit = (e) => {
     e.preventDefault();
 
-    const { distrito, cantidad, destino, fecha, personas, piloto, vehiculo, estadosoli } = this.state;
+    const { distrito, cantidad, destino, fechaS, personas, piloto, vehiculo, estadosoli, placa, detalle, fechaR, autorizada } = this.state;
 
     this.ref.add({
       distrito,
       cantidad,
       destino,
-      fecha,
+      fechaS,
       personas,
       piloto,
       vehiculo,
-      estadosoli
+      estadosoli,
+      placa,
+      detalle,
+      fechaR,
+      autorizada
     }).then((docRef) => {
+      
       this.setState({
-        distrito: 'SAN FELIPE',
+        distrito: '',
         cantidad: '',
         destino: '',
-        fecha: '',
+        fechaS: '',
         personas: '',
         piloto: '',
         vehiculo: '',
-        estadosoli: 'PENDIENTE',
+        estadosoli: '',
+        placa: '',
+        detalle:'',
+        fechaR: '',
+        autorizada: ''
       });
       this.props.history.push("/lista-solicitudes-san-felipe")
     })
@@ -78,7 +91,7 @@ class CrearSanFelipe extends Component {
         console.log("Correo lista: " + user.email)
         
 
-        if (user.email === 'sanfelipe@sanfelipe.com') {
+        if (user.email === 'sanfelipedasreu@gmail.com') {
           console.log("el usuario es valido")
           console.log("correo del usuario: " + user.email)
         } else {
@@ -98,7 +111,7 @@ class CrearSanFelipe extends Component {
 
     
 
-    const {  cantidad, destino, fecha, personas, piloto, vehiculo } = this.state;
+    const {  cantidad, destino, fechaS, personas, piloto, vehiculo, placa, detalle, fechaR, autorizada } = this.state;
     return (
 
 
@@ -130,6 +143,7 @@ class CrearSanFelipe extends Component {
                   onChange={this.onChange}
                   margin="normal"
                   fullWidth
+                  
                 />
 
                 <TextField
@@ -153,6 +167,8 @@ class CrearSanFelipe extends Component {
               
 				<TextField
           id="destino"
+          required
+          autoFocus
           name="destino"
                     value={destino}
                     onChange={this.onChange}
@@ -163,14 +179,14 @@ class CrearSanFelipe extends Component {
                         <InputAdornment position="start">Destino:</InputAdornment>
                       )
                     }}
-                  >
+                  />
                     
-                  </TextField>
 						
                 </div>
                 <div className="mt-4">
                   <TextField
             id="vehiculo"
+            required
             name="vehiculo"
           value={vehiculo}
           type="text"
@@ -179,20 +195,32 @@ class CrearSanFelipe extends Component {
                     InputProps={{
                       startAdornment: (
                         <InputAdornment position="start">
-                          Vehiculo
+                          Vehiculo:
                         </InputAdornment>
                       )
                     }}
-                  >
+                  />
+
+                  <TextField
+                    id="placa"
+                    required
+                    name="placa"
+                    label="Placa del vehículo: "
+                    value={placa}
+                    type="text"
+                    onChange={this.onChange}
+                    margin="normal"
+                    fullWidth
+                  />
                    
-                  </TextField>
                 </div>
 
                 <div className="mt-1">
                   <TextField
                     id="personas"
+                    required
                     name="personas"
-                    label="Personas que conforman la comision"
+                    label="Personas que conforman la comision:"
                     value={personas}
                     type="text"
                     onChange={this.onChange}
@@ -211,26 +239,41 @@ class CrearSanFelipe extends Component {
                   type="number"
                   id="cantidad"
                   name="cantidad"
-                  label="Cantidad de Combustible que Solicita"
+                  label="Cantidad de Combustible que Solicita en Quetzales: "
                   value={cantidad}
-                  
+                  required
                   onChange={this.onChange}
                   margin="normal"
                   fullWidth
                 />
+
+                <TextField
+                  type="text"
+                  id="detalle"
+                  name="detalle"
+                  label="Detalle de comisión: "
+                  value={detalle}
+                  required
+                  onChange={this.onChange}
+                  margin="normal"
+                  fullWidth
+                />
+
               </div>
 
               <div className="mt-4">
+              <h6>Fecha y Hora de Salida / Regreso</h6>
                 <Grid container justify="center">
+                  
                   <Grid item xs={5}>
                     <TextField
-                      id="fecha"
-                      name="fecha"
-                      label="Hora y Fecha"
-                      type="date"
+                      id="fechaS"
+                      name="fechaS"
+                      label="Salida: "
+                      type="datetime-local"
 					  InputLabelProps={{ shrink: true, }}
-                      value={fecha}
-                      
+                      value={fechaS}
+                      required
           onChange={this.onChange}
                     />
                   </Grid>
@@ -238,6 +281,7 @@ class CrearSanFelipe extends Component {
                     <TextField
             id="piloto"
             name="piloto"
+            required
                       value={piloto}
                       type="text"
           onChange={this.onChange}
@@ -250,12 +294,51 @@ class CrearSanFelipe extends Component {
                         )
                       }}
                       className="mt-3"
-                    >
+                    />
                       
-                    </TextField>
                   </Grid>
                 </Grid>
               </div>
+
+              <div className="mt-4">
+                <Grid container justify="center">
+                  <Grid item xs={5}>
+                    <TextField
+                      id="fechaR"
+                      name="fechaR"
+                      label="Retorno: "
+                      type="date"
+					  InputLabelProps={{ shrink: true, }}
+                      value={fechaR}
+                      required
+          onChange={this.onChange}
+                    />
+                  </Grid>
+                  
+                  <Grid item xs={5}>
+                    <TextField
+            id="autorizada"
+            name="autorizada"
+            required
+                      value={autorizada}
+                      type="text"
+          onChange={this.onChange}
+                      fullWidth
+                      InputProps={{
+                        startAdornment: (
+                          <InputAdornment position="start">
+                            Vo.Bo:
+                          </InputAdornment>
+                        )
+                      }}
+                      className="mt-3"
+                    />
+                      
+                  </Grid>
+                  
+                </Grid>
+              </div>
+
               <div className="mt-5 d-flex justify-content-center">
                 <Fab variant="extended" color="primary" aria-label="add" onClick={this.onSubmit}>
                   <NavigationIcon />

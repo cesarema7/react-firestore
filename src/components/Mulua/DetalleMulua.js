@@ -7,22 +7,22 @@ import ListIcon from '@material-ui/icons/ListAlt';
 import OkIcon from '@material-ui/icons/CheckCircle';
 import XIcon from '@material-ui/icons/Cancel';
 
-class DetalleReu extends Component {
+class DetalleMulua extends Component {
 
   constructor(props) {
     super(props);
     this.state = {
-      solicitudreu: {},
+      solicitudmulua: {},
       key: ''
     };
   }
 
   componentDidMount() {
-    const ref = firebase.firestore().collection('solicitudes-reu').doc(this.props.match.params.id);
+    const ref = firebase.firestore().collection('solicitudes-mulua').doc(this.props.match.params.id);
     ref.get().then((doc) => {
       if (doc.exists) {
         this.setState({
-          solicitudreu: doc.data(),
+          solicitudmulua: doc.data(),
           key: doc.id,
           isLoading: false
         });
@@ -33,16 +33,16 @@ class DetalleReu extends Component {
   }
 
   delete(id){
-    firebase.firestore().collection('solicitudes-reu').doc(id).delete().then(() => {
+    firebase.firestore().collection('solicitudes-mulua').doc(id).delete().then(() => {
       console.log("Document successfully deleted!");
-      this.props.history.push("/lista-solicitudes-retalhuleu")
+      this.props.history.push("/lista-solicitudes-santa-cruz-mulua")
     }).catch((error) => {
       console.error("Error removing document: ", error);
     });
   }
 
   aprobar(id){
-    firebase.firestore().collection('solicitudes-reu').doc(id).update({estadosoli: 'APROBADO'}).then(() => {
+    firebase.firestore().collection('solicitudes-mulua').doc(id).update({estadosoli: 'APROBADO'}).then(() => {
       console.log("Document successfully actualizado!");
       this.props.history.push("/lista-solicitudes-pendientes")
     }).catch((error) => {
@@ -51,7 +51,7 @@ class DetalleReu extends Component {
   }
 
   rechazar(id){
-    firebase.firestore().collection('solicitudes-reu').doc(id).update({estadosoli: 'RECHAZADO'}).then(() => {
+    firebase.firestore().collection('solicitudes-mulua').doc(id).update({estadosoli: 'RECHAZADO'}).then(() => {
       console.log("Document successfully actualizado!");
       this.props.history.push("/lista-solicitudes-pendientes")
     }).catch((error) => {
@@ -68,7 +68,7 @@ class DetalleReu extends Component {
         console.log("Correo lista: " + user.email)
        
 
-        if (user.email === 'csreumspas@hotmail.com' || 
+        if (user.email === 'distritomulua@gmail.com' || 
             user.email === 'bedemo09@yahoo.com' || 
             user.email === 'victorlloranca@gmail.com' || 
             user.email === 'gafretalhuleu@gmail.com') {
@@ -92,7 +92,7 @@ class DetalleReu extends Component {
             btn_rechazado.style.display = 'inline';
           }
           
-          if (user.email === 'csreumspas@hotmail.com') {
+          if (user.email === 'distritomulua@gmail.com') {
             var btn_aprobado = document.getElementById('btn-aprobado');
             btn_aprobado.style.display = 'none';
             var btn_editar = document.getElementById('btn-editar');
@@ -150,40 +150,40 @@ class DetalleReu extends Component {
           <div class="panel-heading">
             <div className="mt-3">
               <h4><Link id="btn-ls" to="/lista-solicitudes-pendientes" class="btn btn-primary">Listado de solicitudes<ListIcon/> </Link></h4>
-              <h4><Link id="btn-lsr" to="/lista-solicitudes-retalhuleu" class="btn btn-primary">Listado de solicitudes RETALHULEU<ListIcon/> </Link></h4>
+              <h4><Link id="btn-lsr" to="/lista-solicitudes-santa-cruz-mulua" class="btn btn-primary">Listado de solicitudes SANTA CRUZ MULUÁ<ListIcon/> </Link></h4>
               <h4><Link id="btn-lsa" to="/lista-solicitudes-aprobadas" class="btn btn-primary">Listado de solicitudes<ListIcon/> </Link></h4>
             </div>
           
             <h3 class="panel-title">
-              {this.state.solicitudreu.estadosoli}
+              {this.state.solicitudmulua.estadosoli}
             </h3>
           </div>
           <div class="panel-body">
             <dl>
               <dt>Distrito:</dt>
-              <dd>{this.state.solicitudreu.distrito}</dd>
+              <dd>{this.state.solicitudmulua.distrito}</dd>
               <dt>Destino:</dt>
-              <dd>{this.state.solicitudreu.destino}</dd>
+              <dd>{this.state.solicitudmulua.destino}</dd>
               <dt>Vehículo:</dt>
-              <dd>{this.state.solicitudreu.vehiculo}</dd>
+              <dd>{this.state.solicitudmulua.vehiculo}</dd>
               <dt>Placa del vehículo:</dt>
-              <dd>{this.state.solicitudreu.placa}</dd>
+              <dd>{this.state.solicitudmulua.placa}</dd>
               <dt>Personas que conforman la comision:</dt>
-              <dd>{this.state.solicitudreu.personas}</dd>
+              <dd>{this.state.solicitudmulua.personas}</dd>
               <dt>Cantidad de Combustible que Solicita en Quetzales:</dt>
-              <dd>{this.state.solicitudreu.cantidad}</dd>
+              <dd>{this.state.solicitudmulua.cantidad}</dd>
               <dt>Detalle de comisión:</dt>
-              <dd>{this.state.solicitudreu.detalle}</dd>
+              <dd>{this.state.solicitudmulua.detalle}</dd>
               <dt>Hora y Fecha de salida:</dt>
-              <dd>{this.state.solicitudreu.fechaS}</dd>
+              <dd>{this.state.solicitudmulua.fechaS}</dd>
               <dt>Fecha de regreso:</dt>
-              <dd>{this.state.solicitudreu.fechaR}</dd>
+              <dd>{this.state.solicitudmulua.fechaR}</dd>
               <dt>Piloto:</dt>
-              <dd>{this.state.solicitudreu.piloto}</dd>
+              <dd>{this.state.solicitudmulua.piloto}</dd>
               <dt>Vo.Bo:</dt>
-              <dd>{this.state.solicitudreu.autorizada}</dd>
+              <dd>{this.state.solicitudmulua.autorizada}</dd>
             </dl>
-            <Link id="btn-editar" to={`/editar-solicitud-retalhuleu/${this.state.key}`} class="btn btn-warning">Editar <EIcon /> </Link>&nbsp;
+            <Link id="btn-editar" to={`/editar-solicitud-santa-cruz-mulua/${this.state.key}`} class="btn btn-warning">Editar <EIcon /> </Link>&nbsp;
             <button id="btn-eliminar" onClick={this.delete.bind(this, this.state.key)} class="btn btn-danger">Eliminar <DIcon /> </button>
             <button id="btn-aprobado" onClick={this.aprobar.bind(this, this.state.key)} class="btn btn-success">Aprobar <OkIcon /> </button>
             <button id="btn-rechazado" onClick={this.rechazar.bind(this, this.state.key)} class="btn btn-danger">Rechazar <XIcon /> </button>
@@ -194,4 +194,4 @@ class DetalleReu extends Component {
   }
 }
 
-export default DetalleReu;
+export default DetalleMulua;

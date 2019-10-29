@@ -5,6 +5,7 @@ import EIcon from '@material-ui/icons/Edit';
 import DIcon from '@material-ui/icons/Delete';
 import ListIcon from '@material-ui/icons/ListAlt';
 import OkIcon from '@material-ui/icons/CheckCircle';
+import XIcon from '@material-ui/icons/Cancel';
 
 class DetalleSanMartin extends Component {
 
@@ -34,7 +35,7 @@ class DetalleSanMartin extends Component {
   delete(id){
     firebase.firestore().collection('solicitudes-san-martin').doc(id).delete().then(() => {
       console.log("Document successfully deleted!");
-      this.props.history.push("/lista-solicitudes-san-martin")
+      this.props.history.push("/lista-solicitudes-san-martin-zapotitlan")
     }).catch((error) => {
       console.error("Error removing document: ", error);
     });
@@ -43,7 +44,16 @@ class DetalleSanMartin extends Component {
   aprobar(id){
     firebase.firestore().collection('solicitudes-san-martin').doc(id).update({estadosoli: 'APROBADO'}).then(() => {
       console.log("Document successfully actualizado!");
-      this.props.history.push("/lista-solicitudes-aprobadas")
+      this.props.history.push("/lista-solicitudes-pendientes")
+    }).catch((error) => {
+      console.error("Error actualizando document: ", error);
+    });    
+  }
+
+  rechazar(id){
+    firebase.firestore().collection('solicitudes-san-martin').doc(id).update({estadosoli: 'RECHAZADO'}).then(() => {
+      console.log("Document successfully actualizado!");
+      this.props.history.push("/lista-solicitudes-pendientes")
     }).catch((error) => {
       console.error("Error actualizando document: ", error);
     });    
@@ -56,11 +66,14 @@ class DetalleSanMartin extends Component {
         console.log('si')
 
 
-        if (user.email === 'sanmartin@sanmartin.com' || user.email === 'apro@apro.com') {
+        if (user.email === 'puestosanmartin@gmail.com' || 
+            user.email === 'bedemo09@yahoo.com' || 
+            user.email === 'victorlloranca@gmail.com' || 
+            user.email === 'gafretalhuleu@gmail.com') {
           console.log("el usuario es valido")
           console.log("correo del usuario: " + user.email)
 
-          if (user.email === 'apro@apro.com') {
+          if (user.email === 'victorlloranca@gmail.com' || user.email === 'gafretalhuleu@gmail.com') {
             var btn_aprobado = document.getElementById('btn-aprobado');
             btn_aprobado.style.display = 'inline';
             var btn_editar = document.getElementById('btn-editar');
@@ -71,19 +84,44 @@ class DetalleSanMartin extends Component {
             btn_ls.style.display = 'inline';
             var btn_lsr= document.getElementById('btn-lsr');
             btn_lsr.style.display = 'none';
-            
-          } else {
+            var btn_lsa= document.getElementById('btn-lsa');
+            btn_lsa.style.display = 'none';
+            var btn_rechazado= document.getElementById('btn-rechazado');
+            btn_rechazado.style.display = 'inline';
+          }
+          
+          if (user.email === 'puestosanmartin@gmail.com') {
             var btn_aprobado = document.getElementById('btn-aprobado');
             btn_aprobado.style.display = 'none';
             var btn_editar = document.getElementById('btn-editar');
-            btn_editar.style.display = 'inline';
+            btn_editar.style.display = 'none';
             var btn_eliminar= document.getElementById('btn-eliminar');
-            btn_eliminar.style.display = 'inline';
+            btn_eliminar.style.display = 'none';
             var btn_ls= document.getElementById('btn-ls');
             btn_ls.style.display = 'none';
             var btn_lsr= document.getElementById('btn-lsr');
             btn_lsr.style.display = 'inline';
-            
+            var btn_lsa= document.getElementById('btn-lsa');
+            btn_lsa.style.display = 'none';
+            var btn_rechazado= document.getElementById('btn-rechazado');
+            btn_rechazado.style.display = 'none';
+          }
+
+          if (user.email === 'bedemo09@yahoo.com') {
+            var btn_aprobado = document.getElementById('btn-aprobado');
+            btn_aprobado.style.display = 'none';
+            var btn_editar = document.getElementById('btn-editar');
+            btn_editar.style.display = 'none';
+            var btn_eliminar= document.getElementById('btn-eliminar');
+            btn_eliminar.style.display = 'none';
+            var btn_ls= document.getElementById('btn-ls');
+            btn_ls.style.display = 'none';
+            var btn_lsr= document.getElementById('btn-lsr');
+            btn_lsr.style.display = 'none';
+            var btn_lsa= document.getElementById('btn-lsa');
+            btn_lsa.style.display = 'inline';
+            var btn_rechazado= document.getElementById('btn-rechazado');
+            btn_rechazado.style.display = 'none';
           }
 
         } else {
@@ -106,33 +144,43 @@ class DetalleSanMartin extends Component {
           <div class="panel-heading">
             <div className="mt-3">
             <h4><Link id="btn-ls" to="/lista-solicitudes-pendientes" class="btn btn-primary">Listado de solicitudes<ListIcon/> </Link></h4>
-            <h4><Link id="btn-lsr" to="/lista-solicitudes-san-martin" class="btn btn-primary">Listado de solicitudes SAN MARTIN<ListIcon/> </Link></h4>
+            <h4><Link id="btn-lsr" to="/lista-solicitudes-san-martin-zapotitlan" class="btn btn-primary">Listado de solicitudes SAN MARTÍN ZAPOTITLÁN<ListIcon/> </Link></h4>
+            <h4><Link id="btn-lsa" to="/lista-solicitudes-aprobadas" class="btn btn-primary">Listado de solicitudes<ListIcon/> </Link></h4>
             </div>
           
             <h3 class="panel-title">
-              {this.state.solicitudsanmartin.fecha}
+              {this.state.solicitudsanmartin.estadosoli}
             </h3>
           </div>
           <div class="panel-body">
             <dl>
-              <dt>Estado de la solicitud:</dt>
-              <dd>{this.state.solicitudsanmartin.estadosoli}</dd>
               <dt>Distrito:</dt>
               <dd>{this.state.solicitudsanmartin.distrito}</dd>
               <dt>Destino:</dt>
               <dd>{this.state.solicitudsanmartin.destino}</dd>
-              <dt>Piloto:</dt>
-              <dd>{this.state.solicitudsanmartin.piloto}</dd>
               <dt>Vehículo:</dt>
               <dd>{this.state.solicitudsanmartin.vehiculo}</dd>
+              <dt>Placa del vehículo:</dt>
+              <dd>{this.state.solicitudsanmartin.placa}</dd>
               <dt>Personas que conforman la comision:</dt>
               <dd>{this.state.solicitudsanmartin.personas}</dd>
-              <dt>Cantidad de Combustible que Solicita:</dt>
+              <dt>Cantidad de Combustible que Solicita en Quetzales:</dt>
               <dd>{this.state.solicitudsanmartin.cantidad}</dd>
+              <dt>Detalle de comisión:</dt>
+              <dd>{this.state.solicitudsanmartin.detalle}</dd>
+              <dt>Hora y Fecha de salida:</dt>
+              <dd>{this.state.solicitudsanmartin.fechaS}</dd>
+              <dt>Fecha de regreso:</dt>
+              <dd>{this.state.solicitudsanmartin.fechaR}</dd>
+              <dt>Piloto:</dt>
+              <dd>{this.state.solicitudsanmartin.piloto}</dd>
+              <dt>Vo.Bo:</dt>
+              <dd>{this.state.solicitudsanmartin.autorizada}</dd>
             </dl>
-            <Link id="btn-editar" to={`/editar-solicitud-san-martin/${this.state.key}`} class="btn btn-warning">Editar <EIcon /> </Link>&nbsp;
+            <Link id="btn-editar" to={`/editar-solicitud-san-martin-zapotitlan/${this.state.key}`} class="btn btn-warning">Editar <EIcon /> </Link>&nbsp;
             <button id="btn-eliminar" onClick={this.delete.bind(this, this.state.key)} class="btn btn-danger">Eliminar <DIcon /> </button>
             <button id="btn-aprobado" onClick={this.aprobar.bind(this, this.state.key)} class="btn btn-success">Aprobar <OkIcon /> </button>
+            <button id="btn-rechazado" onClick={this.rechazar.bind(this, this.state.key)} class="btn btn-danger">Rechazar <XIcon /> </button>
           </div>
         </div>
       </div>

@@ -7,7 +7,7 @@ import InputAdornment from "@material-ui/core/InputAdornment";
 import Fab from "@material-ui/core/Fab";
 import NavigationIcon from "@material-ui/icons/Navigation";
 
-class EditarReu extends Component {
+class EditarLm2 extends Component {
 
   constructor(props) {
     super(props);
@@ -29,24 +29,24 @@ class EditarReu extends Component {
   }
 
   componentDidMount() {
-    const ref = firebase.firestore().collection('solicitudes-reu').doc(this.props.match.params.id);
+    const ref = firebase.firestore().collection('solicitudes-lm2').doc(this.props.match.params.id);
     ref.get().then((doc) => {
       if (doc.exists) {
-        const solicitudreu = doc.data();
+        const solicitudlm2 = doc.data();
         this.setState({
           key: doc.id,
-          estadosoli: solicitudreu.estadosoli,
-          distrito: solicitudreu.distrito,
-          cantidad: solicitudreu.cantidad,
-          destino: solicitudreu.destino,
-          fechaS: solicitudreu.fechaS,
-          personas: solicitudreu.personas,
-          piloto: solicitudreu.piloto,
-          vehiculo: solicitudreu.vehiculo,
-          placa: solicitudreu.placa,
-          detalle: solicitudreu.detalle,
-          fechaR: solicitudreu.fechaR,
-          autorizada: solicitudreu.autorizada
+          estadosoli: solicitudlm2.estadosoli,
+          distrito: solicitudlm2.distrito,
+          cantidad: solicitudlm2.cantidad,
+          destino: solicitudlm2.destino,
+          fechaS: solicitudlm2.fechaS,
+          personas: solicitudlm2.personas,
+          piloto: solicitudlm2.piloto,
+          vehiculo: solicitudlm2.vehiculo,
+          placa: solicitudlm2.placa,
+          detalle: solicitudlm2.detalle,
+          fechaR: solicitudlm2.fechaR,
+          autorizada: solicitudlm2.autorizada
         });
       } else {
         console.log("No such document!");
@@ -57,7 +57,7 @@ class EditarReu extends Component {
   onChange = (e) => {
     const state = this.state
     state[e.target.name] = e.target.value;
-    this.setState({solicitudreu:state});
+    this.setState({solicitudlm2:state});
   }
 
   onSubmit = (e) => {
@@ -65,7 +65,7 @@ class EditarReu extends Component {
 
     const { estadosoli, distrito, cantidad, destino, fechaS, personas, piloto, vehiculo, placa, detalle, fechaR, autorizada } = this.state;
 
-    const updateRef = firebase.firestore().collection('solicitudes-reu').doc(this.state.key);
+    const updateRef = firebase.firestore().collection('solicitudes-lm2').doc(this.state.key);
     updateRef.set({
       estadosoli,
       distrito,
@@ -96,7 +96,7 @@ class EditarReu extends Component {
         autorizada: ''
       });
       //this.props.history.push("/show/"+this.props.match.params.id)
-      this.props.history.push("/lista-solicitudes-retalhuleu")
+      this.props.history.push("/lista-solicitudes-la-maquina-II")
     })
     .catch((error) => {
       console.error("Error adding document: ", error);
@@ -112,7 +112,7 @@ class EditarReu extends Component {
         console.log("Correo lista: " + user.email)
        
 
-        if (user.email === 'csreumspas@hotmail.com') {
+        if (user.email === 'csmaquina2@gmail.com') {
           console.log("el usuario es valido")
           console.log("correo del usuario: " + user.email)
         } else {
@@ -138,7 +138,7 @@ class EditarReu extends Component {
           <Grid container spacing={3}>
             <Grid className="mx-auto">
               <div>
-              <h4><Link to={`/detalle-solicitud-retalhuleu/${this.state.key}`} class="btn btn-primary">Volver a detalles de solicitud RETALHULEU</Link></h4>
+              <h4><Link to={`/detalle-solicitud-la-maquina-II/${this.state.key}`} class="btn btn-primary">Volver a detalles de solicitud LA MAQUINA II</Link></h4>
 			  </div>
 			  <div>
                 <h1 className="text-center font-weight-bold">
@@ -377,4 +377,4 @@ class EditarReu extends Component {
   }
 }
 
-export default EditarReu;
+export default EditarLm2;

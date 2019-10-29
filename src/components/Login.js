@@ -103,45 +103,88 @@ function Login(props) {
         var password = document.getElementById('password').value;
         firebase.auth().signInWithEmailAndPassword(email, password)
         .then(function(){
-           // props.history.replace('/list')
+           
 			alert('¡BIENVENIDO!')
 
-			if (email === 'reu@reu.com') {
-
-				props.history.replace('/lista-solicitudes-reu')
+			if (email === 'csreumspas@hotmail.com') {
+				props.history.replace('/lista-solicitudes-retalhuleu')
 				console.log('***********')
-				console.log('vista de reu: ' + email)
-				
-			} else {
-				if (email === 'sanmartin@sanmartin.com') {
+				console.log('vista de reutalhuleu: ' + email)				
+			}
 
-					props.history.replace('/lista-solicitudes-san-martin')
-					console.log('***********')
-					console.log('vista de san martin: ' + email)
-					
-				} else {
-					if (email === 'doc@doc.com') {
-						
-							props.history.replace('/lista-solicitudes-aprovadas')
-								//alert('en proceso')
-								console.log('***********')
-								console.log('vista de doctora jefa: ' + email)
-			
-						
-					} else {
-						if (email === 'apro@apro.com') {
-							props.history.replace('/lista-solicitudes-pendientes')
-								console.log('***********')
-								console.log('vista del que aprueba: ' + email)
-						}
-					}
-				}
-			} 
-			if (email === 'sanfelipe@sanfelipe.com') {
+			if (email === 'capchamperico@gmail.com') {
+				props.history.replace('/lista-solicitudes-champerico')
+				console.log('***********')
+				console.log('vista de champerico: ' + email)				
+			}
+
+			if (email === 'distritomulua@gmail.com') {
+				props.history.replace('/lista-solicitudes-santa-cruz-mulua')
+				console.log('***********')
+				console.log('vista de muluá: ' + email)				
+			}
+
+			if (email === 'csmaquina2@gmail.com') {
+				props.history.replace('/lista-solicitudes-la-maquina-II')
+				console.log('***********')
+				console.log('vista de la máquina II: ' + email)				
+			}
+
+			if (email === 'distritodesaludnuevosancarlos@hotmail.com') {
+				props.history.replace('/lista-solicitudes-nuevo-san-carlos')
+				console.log('***********')
+				console.log('vista de nuevo san carlos: ' + email)				
+			}
+
+			if (email === 'dcaballoblanco2013@gmail.com') {
+				props.history.replace('/lista-solicitudes-caballo-blanco')
+				console.log('***********')
+				console.log('vista de caballo blanco: ' + email)				
+			}
+
+			if (email === 'sanfelipedasreu@gmail.com') {
 				props.history.replace('/lista-solicitudes-san-felipe')
 				console.log('***********')
-				console.log('vista de san martin: ' + email)
+				console.log('vista de san felipe: ' + email)				
 			}
+
+			if (email === 'distritonumero8@hotmail.com') {
+				props.history.replace('/lista-solicitudes-san-sebastian')
+				console.log('***********')
+				console.log('vista de san sebastián: ' + email)				
+			}
+
+			if (email === 'capelasintal@gmail.com') {
+				props.history.replace('/lista-solicitudes-el-asintal')
+				console.log('***********')
+				console.log('vista de san sebastián: ' + email)				
+			}
+
+			if (email === 'distritos.a.v.s.10reu@hotmail.com') {
+				props.history.replace('/lista-solicitudes-san-andres-villa-seca')
+				console.log('***********')
+				console.log('vista de san andres: ' + email)				
+			}
+
+			if (email === 'puestosanmartin@gmail.com') {
+				props.history.replace('/lista-solicitudes-san-martin-zapotitlan')
+				console.log('***********')
+				console.log('vista de san martín: ' + email)				
+			}
+
+			if (email === 'bedemo09@yahoo.com') {
+				props.history.replace('/lista-solicitudes-aprobadas')
+				console.log('***********')
+				console.log('vista de la doctora: ' + email)				
+			}
+
+			if (email === 'gafretalhuleu@gmail.com' ||
+				email === 'victorlloranca@gmail.com') {
+				props.history.replace('/lista-solicitudes-pendientes')
+				console.log('***********')
+				console.log('vista de los que autorizan: ' + email)				
+			}
+
         })
         .catch(function(error) {
             // Handle Errors here.
@@ -151,41 +194,7 @@ function Login(props) {
             console.log(errorMessage);
             alert('Credenciales Incorrectas...      Intenta Nuevamente')
             // ...
-		  });
-		  
-		/*
-		  firebase.auth().currentUser 
-		  .then(function(){
-			  alert('No autorizado')
-			  props.history.replace('/')
-		  })
-		  .catch*/
-
-/*AuthStateChanged(function(user) {
-            if (user) {
-                console.log('siii')
-                //aparece();
-
-
-            }else{
-                console.log('noooo')
-            }
-        });
-    }*/
-/*
-    function aparece(){
-        var contenido = document.getElementById('contenido');
-        contenido.innerHTML = "solo lo ve usuario activo"
-    }
-    
-    function ok() {
-        firebase.auth().currentUser 
-        .then(function(){
-            alert('No autorizado')
-            props.history.replace('/')
-        })
-    }*/
-
+		  });		
 	}
 }
 

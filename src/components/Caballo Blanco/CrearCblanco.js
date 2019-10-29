@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
 import firebase from '../../Firebase';
 import { Link } from 'react-router-dom';
 import TextField from '@material-ui/core/TextField';
@@ -6,68 +7,43 @@ import Grid from "@material-ui/core/Grid";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import Fab from "@material-ui/core/Fab";
 import NavigationIcon from "@material-ui/icons/Navigation";
+import { KeyboardDatePicker } from "@material-ui/pickers";
 
-class EditarReu extends Component {
+class CrearCblanco extends Component {
 
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
+    
+    this.ref = firebase.firestore().collection('solicitudes-cblanco');
     this.state = {
-      key: '',
-      estadosoli: '',
-      distrito: '',
+      distrito: 'CABALLO BLANCO',
+      //distrito: '',
       cantidad: '',
       destino: '',
       fechaS: '',
       personas: '',
       piloto: '',
       vehiculo: '',
+      estadosoli: 'PENDIENTE',
       placa: '',
       detalle: '',
       fechaR: '',
       autorizada: ''
+
     };
   }
-
-  componentDidMount() {
-    const ref = firebase.firestore().collection('solicitudes-reu').doc(this.props.match.params.id);
-    ref.get().then((doc) => {
-      if (doc.exists) {
-        const solicitudreu = doc.data();
-        this.setState({
-          key: doc.id,
-          estadosoli: solicitudreu.estadosoli,
-          distrito: solicitudreu.distrito,
-          cantidad: solicitudreu.cantidad,
-          destino: solicitudreu.destino,
-          fechaS: solicitudreu.fechaS,
-          personas: solicitudreu.personas,
-          piloto: solicitudreu.piloto,
-          vehiculo: solicitudreu.vehiculo,
-          placa: solicitudreu.placa,
-          detalle: solicitudreu.detalle,
-          fechaR: solicitudreu.fechaR,
-          autorizada: solicitudreu.autorizada
-        });
-      } else {
-        console.log("No such document!");
-      }
-    });
-  }
-
   onChange = (e) => {
     const state = this.state
     state[e.target.name] = e.target.value;
-    this.setState({solicitudreu:state});
+    this.setState(state);
   }
 
   onSubmit = (e) => {
     e.preventDefault();
 
-    const { estadosoli, distrito, cantidad, destino, fechaS, personas, piloto, vehiculo, placa, detalle, fechaR, autorizada } = this.state;
+    const { distrito, cantidad, destino, fechaS, personas, piloto, vehiculo, estadosoli, placa, detalle, fechaR, autorizada } = this.state;
 
-    const updateRef = firebase.firestore().collection('solicitudes-reu').doc(this.state.key);
-    updateRef.set({
-      estadosoli,
+    this.ref.add({
       distrito,
       cantidad,
       destino,
@@ -75,14 +51,14 @@ class EditarReu extends Component {
       personas,
       piloto,
       vehiculo,
+      estadosoli,
       placa,
       detalle,
       fechaR,
       autorizada
     }).then((docRef) => {
+      
       this.setState({
-        key: '',
-        estadosoli: '',
         distrito: '',
         cantidad: '',
         destino: '',
@@ -90,20 +66,36 @@ class EditarReu extends Component {
         personas: '',
         piloto: '',
         vehiculo: '',
+        estadosoli: '',
         placa: '',
-        detalle: '',
+        detalle:'',
         fechaR: '',
         autorizada: ''
       });
-      //this.props.history.push("/show/"+this.props.match.params.id)
-      this.props.history.push("/lista-solicitudes-retalhuleu")
+      this.props.history.push("/lista-solicitudes-caballo-blanco")
     })
     .catch((error) => {
       console.error("Error adding document: ", error);
     });
   }
 
+
+ 
+
   render() {
+
+    /*var user2 =  firebase.auth().currentUser ;
+    console.log(user2)
+    
+    if (user2.email === 'reu@reu.com') {
+      console.log("el usuario es valido")
+      console.log("correo del usuario: " + user2.email)
+    } else {
+      alert('usuario no admitido')
+      window.location = '/' 
+      
+    }*/
+
     
     firebase.auth().onAuthStateChanged(function(user) {
       if (user) {
@@ -112,7 +104,7 @@ class EditarReu extends Component {
         console.log("Correo lista: " + user.email)
        
 
-        if (user.email === 'csreumspas@hotmail.com') {
+        if (user.email === 'dcaballoblanco2013@gmail.com') {
           console.log("el usuario es valido")
           console.log("correo del usuario: " + user.email)
         } else {
@@ -131,18 +123,22 @@ class EditarReu extends Component {
       }
     });
 
+    
+
+    const {  cantidad, destino, fechaS, personas, piloto, vehiculo, placa, detalle, fechaR, autorizada } = this.state;
     return (
+
 
       <div className="animated slideInUpTiny animation-duration-3">
         <div className="m-5">
           <Grid container spacing={3}>
             <Grid className="mx-auto">
-              <div>
-              <h4><Link to={`/detalle-solicitud-retalhuleu/${this.state.key}`} class="btn btn-primary">Volver a detalles de solicitud RETALHULEU</Link></h4>
+              <div >
+              
 			  </div>
 			  <div>
                 <h1 className="text-center font-weight-bold">
-                  Solicitud de Combustible
+                  Solicitud de Combustible CABALLO BLANCO
                 </h1>
                 <small className="d-flex justify-content-center font-italic">
                   Ingrese los datos para la Solicitud de Combustible
@@ -157,10 +153,11 @@ class EditarReu extends Component {
                   name="estadosoli"
                   label="Estado de la solicitud:"
                   disabled
-                  value={this.state.estadosoli}
+                  value="PENDIENTE"
                   onChange={this.onChange}
                   margin="normal"
                   fullWidth
+                  
                 />
 
                 <TextField
@@ -176,18 +173,18 @@ class EditarReu extends Component {
 
 
                   //value="asdfasdf"
-                  value={this.state.distrito}
+                  value="CABALLO BLANCO"//{distrito}
                   onChange={this.onChange}
                   margin="normal"
                   fullWidth
                 />
-
-                
-
+              
 				<TextField
           id="destino"
+          required
+          autoFocus
           name="destino"
-                    value={this.state.destino}
+                    value={destino}
                     onChange={this.onChange}
                     fullWidth
                     type="text"
@@ -196,50 +193,49 @@ class EditarReu extends Component {
                         <InputAdornment position="start">Destino:</InputAdornment>
                       )
                     }}
-                  >
+                  />
                     
-                  </TextField>
 						
                 </div>
                 <div className="mt-4">
                   <TextField
             id="vehiculo"
+            required
             name="vehiculo"
-            value={this.state.vehiculo}
-          
+          value={vehiculo}
           type="text"
           onChange={this.onChange}
                     fullWidth
                     InputProps={{
                       startAdornment: (
                         <InputAdornment position="start">
-                          Vehiculo
+                          Vehiculo:
                         </InputAdornment>
                       )
                     }}
-                  >
-                   
-                  </TextField>
+                  />
 
                   <TextField
                     id="placa"
+                    required
                     name="placa"
                     label="Placa del vehículo: "
-                    value={this.state.placa}
+                    value={placa}
                     type="text"
                     onChange={this.onChange}
                     margin="normal"
                     fullWidth
                   />
-
+                   
                 </div>
 
                 <div className="mt-1">
                   <TextField
                     id="personas"
+                    required
                     name="personas"
-                    label="Personas que conforman la comision"
-                    value={this.state.personas}
+                    label="Personas que conforman la comision:"
+                    value={personas}
                     type="text"
                     onChange={this.onChange}
                     margin="normal"
@@ -258,8 +254,8 @@ class EditarReu extends Component {
                   id="cantidad"
                   name="cantidad"
                   label="Cantidad de Combustible que Solicita en Quetzales: "
-                  value={this.state.cantidad}
-                  
+                  value={cantidad}
+                  required
                   onChange={this.onChange}
                   margin="normal"
                   fullWidth
@@ -270,8 +266,8 @@ class EditarReu extends Component {
                   id="detalle"
                   name="detalle"
                   label="Detalle de comisión: "
-                  value={this.state.detalle}
-                  
+                  value={detalle}
+                  required
                   onChange={this.onChange}
                   margin="normal"
                   fullWidth
@@ -290,8 +286,8 @@ class EditarReu extends Component {
                       label="Salida: "
                       type="datetime-local"
 					  InputLabelProps={{ shrink: true, }}
-                      value={this.state.fechaS}
-                      
+                      value={fechaS}
+                      required
           onChange={this.onChange}
                     />
                   </Grid>
@@ -299,7 +295,8 @@ class EditarReu extends Component {
                     <TextField
             id="piloto"
             name="piloto"
-                      value={this.state.piloto}
+            required
+                      value={piloto}
                       type="text"
           onChange={this.onChange}
                       fullWidth
@@ -311,9 +308,8 @@ class EditarReu extends Component {
                         )
                       }}
                       className="mt-3"
-                    >
+                    />
                       
-                    </TextField>
                   </Grid>
                 </Grid>
               </div>
@@ -327,8 +323,8 @@ class EditarReu extends Component {
                       label="Retorno: "
                       type="date"
 					  InputLabelProps={{ shrink: true, }}
-                      value={this.state.fechaR}
-                      
+                      value={fechaR}
+                      required
           onChange={this.onChange}
                     />
                   </Grid>
@@ -337,7 +333,8 @@ class EditarReu extends Component {
                     <TextField
             id="autorizada"
             name="autorizada"
-                      value={this.state.autorizada}
+            required
+                      value={autorizada}
                       type="text"
           onChange={this.onChange}
                       fullWidth
@@ -349,9 +346,8 @@ class EditarReu extends Component {
                         )
                       }}
                       className="mt-3"
-                    >
+                    />
                       
-                    </TextField>
                   </Grid>
                   
                 </Grid>
@@ -360,7 +356,7 @@ class EditarReu extends Component {
               <div className="mt-5 d-flex justify-content-center">
                 <Fab variant="extended" color="primary" aria-label="add" onClick={this.onSubmit}>
                   <NavigationIcon />
-                  Actualizar Solicitud
+                  Enviar Solicitud
                 </Fab>
               </div>
               
@@ -373,8 +369,9 @@ class EditarReu extends Component {
 
 
 
+
     );
   }
 }
 
-export default EditarReu;
+export default CrearCblanco;

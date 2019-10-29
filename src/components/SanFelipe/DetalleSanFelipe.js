@@ -5,6 +5,7 @@ import EIcon from '@material-ui/icons/Edit';
 import DIcon from '@material-ui/icons/Delete';
 import ListIcon from '@material-ui/icons/ListAlt';
 import OkIcon from '@material-ui/icons/CheckCircle';
+import XIcon from '@material-ui/icons/Cancel';
 
 class DetalleSanFelipe extends Component {
 
@@ -49,6 +50,15 @@ class DetalleSanFelipe extends Component {
     });    
   }
 
+  rechazar(id){
+    firebase.firestore().collection('solicitudes-san-felipe').doc(id).update({estadosoli: 'RECHAZADO'}).then(() => {
+      console.log("Document successfully actualizado!");
+      this.props.history.push("/lista-solicitudes-pendientes")
+    }).catch((error) => {
+      console.error("Error actualizando document: ", error);
+    });    
+  }
+
   render() {
     firebase.auth().onAuthStateChanged(function(user) {
       if (user) {
@@ -56,35 +66,64 @@ class DetalleSanFelipe extends Component {
         console.log('si')
 
 
-        if (user.email === 'sanfelipe@sanfelipe.com' || user.email === 'apro@apro.com') {
-          console.log("el usuario es valido")
-          console.log("correo del usuario: " + user.email)
+        
+        if (user.email === 'sanfelipedasreu@gmail.com' || 
+        user.email === 'bedemo09@yahoo.com' || 
+        user.email === 'victorlloranca@gmail.com' || 
+        user.email === 'gafretalhuleu@gmail.com') {
+      console.log("el usuario es valido")
+      console.log("correo del usuario: " + user.email)
 
-          if (user.email === 'apro@apro.com') {
-            var btn_aprobado = document.getElementById('btn-aprobado');
-            btn_aprobado.style.display = 'inline';
-            var btn_editar = document.getElementById('btn-editar');
-            btn_editar.style.display = 'none';
-            var btn_eliminar= document.getElementById('btn-eliminar');
-            btn_eliminar.style.display = 'none';
-            var btn_ls= document.getElementById('btn-ls');
-            btn_ls.style.display = 'inline';
-            var btn_lsr= document.getElementById('btn-lsr');
-            btn_lsr.style.display = 'none';
-            
-          } else {
-            var btn_aprobado = document.getElementById('btn-aprobado');
-            btn_aprobado.style.display = 'none';
-            var btn_editar = document.getElementById('btn-editar');
-            btn_editar.style.display = 'inline';
-            var btn_eliminar= document.getElementById('btn-eliminar');
-            btn_eliminar.style.display = 'inline';
-            var btn_ls= document.getElementById('btn-ls');
-            btn_ls.style.display = 'none';
-            var btn_lsr= document.getElementById('btn-lsr');
-            btn_lsr.style.display = 'inline';
-            
-          }
+      if (user.email === 'victorlloranca@gmail.com' || user.email === 'gafretalhuleu@gmail.com') {
+        var btn_aprobado = document.getElementById('btn-aprobado');
+        btn_aprobado.style.display = 'inline';
+        var btn_editar = document.getElementById('btn-editar');
+        btn_editar.style.display = 'none';
+        var btn_eliminar= document.getElementById('btn-eliminar');
+        btn_eliminar.style.display = 'none';
+        var btn_ls= document.getElementById('btn-ls');
+        btn_ls.style.display = 'inline';
+        var btn_lsr= document.getElementById('btn-lsr');
+        btn_lsr.style.display = 'none';
+        var btn_lsa= document.getElementById('btn-lsa');
+        btn_lsa.style.display = 'none';
+        var btn_rechazado= document.getElementById('btn-rechazado');
+        btn_rechazado.style.display = 'inline';
+      }
+      
+      if (user.email === 'sanfelipedasreu@gmail.com') {
+        var btn_aprobado = document.getElementById('btn-aprobado');
+        btn_aprobado.style.display = 'none';
+        var btn_editar = document.getElementById('btn-editar');
+        btn_editar.style.display = 'none';
+        var btn_eliminar= document.getElementById('btn-eliminar');
+        btn_eliminar.style.display = 'none';
+        var btn_ls= document.getElementById('btn-ls');
+        btn_ls.style.display = 'none';
+        var btn_lsr= document.getElementById('btn-lsr');
+        btn_lsr.style.display = 'inline';
+        var btn_lsa= document.getElementById('btn-lsa');
+        btn_lsa.style.display = 'none';
+        var btn_rechazado= document.getElementById('btn-rechazado');
+        btn_rechazado.style.display = 'none';
+      }
+
+      if (user.email === 'bedemo09@yahoo.com') {
+              var btn_aprobado = document.getElementById('btn-aprobado');
+              btn_aprobado.style.display = 'none';
+              var btn_editar = document.getElementById('btn-editar');
+              btn_editar.style.display = 'none';
+              var btn_eliminar= document.getElementById('btn-eliminar');
+              btn_eliminar.style.display = 'none';
+              var btn_ls= document.getElementById('btn-ls');
+              btn_ls.style.display = 'none';
+              var btn_lsr= document.getElementById('btn-lsr');
+              btn_lsr.style.display = 'none';
+              var btn_lsa= document.getElementById('btn-lsa');
+              btn_lsa.style.display = 'inline';
+              var btn_rechazado= document.getElementById('btn-rechazado');
+              btn_rechazado.style.display = 'none';
+            }
 
         } else {
           //alert('usuario no admitido')
@@ -107,32 +146,42 @@ class DetalleSanFelipe extends Component {
             <div className="mt-3">
             <h4><Link id="btn-ls" to="/lista-solicitudes-pendientes" class="btn btn-primary">Listado de solicitudes<ListIcon/> </Link></h4>
             <h4><Link id="btn-lsr" to="/lista-solicitudes-san-felipe" class="btn btn-primary">Listado de solicitudes SAN FELIPE<ListIcon/> </Link></h4>
+            <h4><Link id="btn-lsa" to="/lista-solicitudes-aprobadas" class="btn btn-primary">Listado de solicitudes<ListIcon/> </Link></h4>
             </div>
           
             <h3 class="panel-title">
-              {this.state.solicitudsanfelipe.fecha}
+              {this.state.solicitudsanfelipe.estadosoli}
             </h3>
           </div>
           <div class="panel-body">
             <dl>
-              <dt>Estado de la solicitud:</dt>
-              <dd>{this.state.solicitudsanfelipe.estadosoli}</dd>
               <dt>Distrito:</dt>
               <dd>{this.state.solicitudsanfelipe.distrito}</dd>
               <dt>Destino:</dt>
               <dd>{this.state.solicitudsanfelipe.destino}</dd>
-              <dt>Piloto:</dt>
-              <dd>{this.state.solicitudsanfelipe.piloto}</dd>
               <dt>Vehículo:</dt>
               <dd>{this.state.solicitudsanfelipe.vehiculo}</dd>
+              <dt>Placa del vehículo:</dt>
+              <dd>{this.state.solicitudsanfelipe.placa}</dd>
               <dt>Personas que conforman la comision:</dt>
               <dd>{this.state.solicitudsanfelipe.personas}</dd>
-              <dt>Cantidad de Combustible que Solicita:</dt>
+              <dt>Cantidad de Combustible que Solicita en Quetzales:</dt>
               <dd>{this.state.solicitudsanfelipe.cantidad}</dd>
+              <dt>Detalle de comisión:</dt>
+              <dd>{this.state.solicitudsanfelipe.detalle}</dd>
+              <dt>Hora y Fecha de salida:</dt>
+              <dd>{this.state.solicitudsanfelipe.fechaS}</dd>
+              <dt>Fecha de regreso:</dt>
+              <dd>{this.state.solicitudsanfelipe.fechaR}</dd>
+              <dt>Piloto:</dt>
+              <dd>{this.state.solicitudsanfelipe.piloto}</dd>
+              <dt>Vo.Bo:</dt>
+              <dd>{this.state.solicitudsanfelipe.autorizada}</dd>
             </dl>
             <Link id="btn-editar" to={`/editar-solicitud-san-felipe/${this.state.key}`} class="btn btn-warning">Editar <EIcon /> </Link>&nbsp;
             <button id="btn-eliminar" onClick={this.delete.bind(this, this.state.key)} class="btn btn-danger">Eliminar <DIcon /> </button>
             <button id="btn-aprobado" onClick={this.aprobar.bind(this, this.state.key)} class="btn btn-success">Aprobar <OkIcon /> </button>
+            <button id="btn-rechazado" onClick={this.rechazar.bind(this, this.state.key)} class="btn btn-danger">Rechazar <XIcon /> </button>
           </div>
         </div>
       </div>

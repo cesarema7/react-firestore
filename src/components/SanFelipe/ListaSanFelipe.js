@@ -21,11 +21,11 @@ class ListaSanFelipe extends Component {
   onCollectionUpdate = (querySnapshot) => {
     const solicitudessanfelipe = [];
     querySnapshot.forEach((doc) => {
-      const { fecha, destino, distrito, estadosoli } = doc.data();
+      const { fechaS, destino, distrito, estadosoli } = doc.data();
       solicitudessanfelipe.push({
         key: doc.id,
         doc, // DocumentSnapshot
-        fecha,
+        fechaS,
         destino,
         distrito,
         estadosoli,
@@ -53,7 +53,7 @@ class ListaSanFelipe extends Component {
         var corre = (user.email);
 
 
-        if (corre === 'sanfelipe@sanfelipe.com') {
+        if (corre === 'sanfelipedasreu@gmail.com') {
           console.log('usuario permitido')
         } else {
           window.location = '/'   
@@ -76,19 +76,19 @@ class ListaSanFelipe extends Component {
         <div class="panel panel-default">
           <div class="panel-heading">
             <h3 class="panel-title">
-              solicitud de combustible SAN FELIPE
+              solicitudes de combustible SAN FELIPE
             </h3>
           </div>
           
           <div class="panel-body">
-                    <Fab variant="extended" color="primary" href="http://localhost:3000/nueva-solicitud-san-felipe">
+                    <Fab variant="extended" color="primary" href="https://control-ambulancias-d69ec.firebaseapp.com/nueva-solicitud-san-felipe">
                         Nueva Solicitud  <AIcon /> 
                     </Fab>
             {/*<h4><Link to="/create">Nueva Solicitud <AIcon /> </Link></h4>*/}
             <table class="table table-stripe">
               <thead>
                 <tr>
-                  <th>Fecha</th>
+                  <th>Fecha y Hora de Salida</th>
                   <th>Destino</th>
                   <th>Distrito</th>
                   <th>Estado de solicitud</th>
@@ -97,7 +97,7 @@ class ListaSanFelipe extends Component {
               <tbody>
                 {this.state.solicitudessanfelipe.map(solicitudsanfelipe =>
                   <tr>
-                    <td><Link to={`/detalle-solicitud-san-felipe/${solicitudsanfelipe.key}`}>{solicitudsanfelipe.fecha}</Link></td>
+                    <td><Link to={`/detalle-solicitud-san-felipe/${solicitudsanfelipe.key}`}>{solicitudsanfelipe.fechaS}</Link></td>
                     <td>{solicitudsanfelipe.destino}</td>
                     <td>{solicitudsanfelipe.distrito}</td>
                     <td>{solicitudsanfelipe.estadosoli}</td>
