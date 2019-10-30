@@ -7,7 +7,6 @@ import Grid from "@material-ui/core/Grid";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import Fab from "@material-ui/core/Fab";
 import NavigationIcon from "@material-ui/icons/Navigation";
-import { KeyboardDatePicker } from "@material-ui/pickers";
 
 class CrearLm2 extends Component {
 
@@ -17,7 +16,6 @@ class CrearLm2 extends Component {
     this.ref = firebase.firestore().collection('solicitudes-lm2');
     this.state = {
       distrito: 'LA MÁQUINA II',
-      //distrito: '',
       cantidad: '',
       destino: '',
       fechaS: '',
@@ -29,7 +27,6 @@ class CrearLm2 extends Component {
       detalle: '',
       fechaR: '',
       autorizada: ''
-
     };
   }
   onChange = (e) => {
@@ -81,38 +78,22 @@ class CrearLm2 extends Component {
 
   render() {
 
-    /*var user2 =  firebase.auth().currentUser ;
-    console.log(user2)
-    
-    if (user2.email === 'reu@reu.com') {
-      console.log("el usuario es valido")
-      console.log("correo del usuario: " + user2.email)
-    } else {
-      alert('usuario no admitido')
-      window.location = '/' 
-      
-    }*/
-
     firebase.auth().onAuthStateChanged(function(user) {
       if (user) {
         // User is signed in.
-        console.log('si')
-        console.log("Correo lista: " + user.email)
-       
+        //console.log('si')
+        //console.log("Correo lista: " + user.email)       
 
         if (user.email === 'csmaquina2@gmail.com') {
           console.log("el usuario es valido")
           console.log("correo del usuario: " + user.email)
         } else {
-          //alert('usuario no admitido')
-          window.location = '/' 
-          
+          window.location = '/'           
         }
 
       } else {
         // No user is signed in.
         console.log('no')
-        //alert('¡POR FAVOR INICIA SESIÓN!')
         window.location = '/' 
       }
     });

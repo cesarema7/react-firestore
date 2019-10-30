@@ -1,10 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-
 import firebase from '../../Firebase';
-
-
-
 
 class ListaReuApro extends Component {
   constructor(props) {
@@ -26,8 +22,7 @@ class ListaReuApro extends Component {
         fechaS,
         destino,
         distrito,
-        estadosoli,
-        
+        estadosoli,       
       });
     });
     this.setState({
@@ -36,37 +31,29 @@ class ListaReuApro extends Component {
   }
 
   componentDidMount() {
-    this.unsubscribe = this.ref.onSnapshot(this.onCollectionUpdate);
-    
+    this.unsubscribe = this.ref.onSnapshot(this.onCollectionUpdate);    
   }
-  
-  
 
   render() {
     
     firebase.auth().onAuthStateChanged(function(user) {
       if (user) {
         // User is signed in.
-        console.log('si')
-        console.log("Correo lista: " + user.email)
+        //console.log('si')
+        //console.log("Correo lista: " + user.email)
         
-
         if (user.email === 'gafretalhuleu@gmail.com' ||
-            user.email === 'victorlloranca@gmail.com') {
-          console.log("el usuario es valido")
-          console.log("correo del usuario: " + user.email)
+            user.email === 'victorlloranca@gmail.com' ||
+            user.email === 'cesarema7@gmail.com') {
+          //console.log("el usuario es valido")
+          //console.log("correo del usuario: " + user.email)
         } else {
-          //alert('usuario no admitido')
-          window.location = '/' 
-          
+          window.location = '/'           
         }
-
-
 
       } else {
         // No user is signed in.
         console.log('no')
-        //alert('¡POR FAVOR INICIA SESIÓN!')
         window.location = '/' 
       }
     });
@@ -113,7 +100,6 @@ class ListaReuApro extends Component {
   }
 }
 
-
 class ListaChampericoApro extends Component {
   constructor(props) {
     super(props);
@@ -134,8 +120,7 @@ class ListaChampericoApro extends Component {
         fechaS,
         destino,
         distrito,
-        estadosoli,
-        
+        estadosoli,        
       });
     });
     this.setState({
@@ -144,84 +129,36 @@ class ListaChampericoApro extends Component {
   }
 
   componentDidMount() {
-    this.unsubscribe = this.ref.onSnapshot(this.onCollectionUpdate);
-    
+    this.unsubscribe = this.ref.onSnapshot(this.onCollectionUpdate);    
   }
-  
-  
-
+    
   render() {
     
     firebase.auth().onAuthStateChanged(function(user) {
       if (user) {
         // User is signed in.
-        console.log('si')
-        console.log("Correo lista: " + user.email)
+        //console.log('si')
+        //console.log("Correo lista: " + user.email)
        
-
         if (user.email === 'gafretalhuleu@gmail.com' ||
-            user.email === 'victorlloranca@gmail.com') {
-          console.log("el usuario es valido")
-          console.log("correo del usuario: " + user.email)
+            user.email === 'victorlloranca@gmail.com' ||
+            user.email === 'cesarema7@gmail.com') {
+          //console.log("el usuario es valido")
+          //console.log("correo del usuario: " + user.email)
         } else {
-          //alert('usuario no admitido')
-          window.location = '/' 
-          
+          window.location = '/'         
         }
-
-
 
       } else {
         // No user is signed in.
         console.log('no')
-        //alert('¡POR FAVOR INICIA SESIÓN!')
         window.location = '/' 
       }
     });
 
-    /*var user =  firebase.auth().currentUser ;
-    if (user.email === 'reu@reu.com') {
-      console.log("el usuario es valido")
-      console.log("correo del usuario: " + user.email)
-    } else {
-      alert('usuario no admitido')
-      window.location = '/' 
-      
-    }*/
-      /*
-		  .then(function(){
-			  alert('No autorizado')
-			  props.history.replace('/')
-		  })
-      .catch
-      
-
-    firebase.auth().onAuthStateChanged(function(user) {
-      if (user) {
-        // User is signed in.
-        console.log('si')
-        console.log("Correo lista: " + user.email)
-        var corre = (user.email);
-
-
-        if (corre == 'reu@reu.com') {
-          console.log('usuario permitido')
-        } else {
-          window.location = '/'   
-        }
-
-
-      } else {
-        // No user is signed in.
-        console.log('no')
-        alert('¡POR FAVOR INICIA SESIÓN!')
-        window.location = '/' 
-      }
-    }); */
     return (
       
       <div>
-        {/*<Navbar2/>*/}
       <div class="container">
         
         <div class="panel panel-default">
@@ -233,7 +170,6 @@ class ListaChampericoApro extends Component {
           
           <div class="panel-body">
                     
-            {/*<h4><Link to="/create">Nueva Solicitud <AIcon /> </Link></h4>*/}
             <table class="table table-stripe">
               <thead>
                 <tr>
@@ -282,8 +218,7 @@ class ListaMuluaApro extends Component {
         fechaS,
         destino,
         distrito,
-        estadosoli,
-        
+        estadosoli,        
       });
     });
     this.setState({
@@ -292,84 +227,36 @@ class ListaMuluaApro extends Component {
   }
 
   componentDidMount() {
-    this.unsubscribe = this.ref.onSnapshot(this.onCollectionUpdate);
-    
-  }
-  
-  
+    this.unsubscribe = this.ref.onSnapshot(this.onCollectionUpdate);    
+  }    
 
   render() {
     
     firebase.auth().onAuthStateChanged(function(user) {
       if (user) {
         // User is signed in.
-        console.log('si')
-        console.log("Correo lista: " + user.email)
+        //console.log('si')
+        //console.log("Correo lista: " + user.email)
        
-
         if (user.email === 'gafretalhuleu@gmail.com' ||
-            user.email === 'victorlloranca@gmail.com') {
-          console.log("el usuario es valido")
-          console.log("correo del usuario: " + user.email)
+            user.email === 'victorlloranca@gmail.com' ||
+            user.email === 'cesarema7@gmail.com') {
+          //console.log("el usuario es valido")
+          //console.log("correo del usuario: " + user.email)
         } else {
-          //alert('usuario no admitido')
-          window.location = '/' 
-          
+          window.location = '/'           
         }
-
-
 
       } else {
         // No user is signed in.
         console.log('no')
-        //alert('¡POR FAVOR INICIA SESIÓN!')
         window.location = '/' 
       }
     });
-
-    /*var user =  firebase.auth().currentUser ;
-    if (user.email === 'reu@reu.com') {
-      console.log("el usuario es valido")
-      console.log("correo del usuario: " + user.email)
-    } else {
-      alert('usuario no admitido')
-      window.location = '/' 
-      
-    }*/
-      /*
-		  .then(function(){
-			  alert('No autorizado')
-			  props.history.replace('/')
-		  })
-      .catch
-      
-
-    firebase.auth().onAuthStateChanged(function(user) {
-      if (user) {
-        // User is signed in.
-        console.log('si')
-        console.log("Correo lista: " + user.email)
-        var corre = (user.email);
-
-
-        if (corre == 'reu@reu.com') {
-          console.log('usuario permitido')
-        } else {
-          window.location = '/'   
-        }
-
-
-      } else {
-        // No user is signed in.
-        console.log('no')
-        alert('¡POR FAVOR INICIA SESIÓN!')
-        window.location = '/' 
-      }
-    }); */
+   
     return (
       
       <div>
-        {/*<Navbar2/>*/}
       <div class="container">
         
         <div class="panel panel-default">
@@ -381,7 +268,6 @@ class ListaMuluaApro extends Component {
           
           <div class="panel-body">
                     
-            {/*<h4><Link to="/create">Nueva Solicitud <AIcon /> </Link></h4>*/}
             <table class="table table-stripe">
               <thead>
                 <tr>
@@ -410,7 +296,6 @@ class ListaMuluaApro extends Component {
   }
 }
 
-
 class ListaLm2Apro extends Component {
   constructor(props) {
     super(props);
@@ -431,8 +316,7 @@ class ListaLm2Apro extends Component {
         fechaS,
         destino,
         distrito,
-        estadosoli,
-        
+        estadosoli,        
       });
     });
     this.setState({
@@ -449,70 +333,28 @@ class ListaLm2Apro extends Component {
     firebase.auth().onAuthStateChanged(function(user) {
       if (user) {
         // User is signed in.
-        console.log('si')
-        console.log("Correo lista: " + user.email)
+        //console.log('si')
+        //console.log("Correo lista: " + user.email)
        
         if (user.email === 'gafretalhuleu@gmail.com' ||
-            user.email === 'victorlloranca@gmail.com') {
-          console.log("el usuario es valido")
-          console.log("correo del usuario: " + user.email)
+            user.email === 'victorlloranca@gmail.com' ||
+            user.email === 'cesarema7@gmail.com') {
+          //console.log("el usuario es valido")
+          //console.log("correo del usuario: " + user.email)
         } else {
-          //alert('usuario no admitido')
-          window.location = '/' 
-          
+          window.location = '/'         
         }
 
       } else {
         // No user is signed in.
-        console.log('no')
-        //alert('¡POR FAVOR INICIA SESIÓN!')
+        //console.log('no')
         window.location = '/' 
       }
     });
 
-    /*var user =  firebase.auth().currentUser ;
-    if (user.email === 'reu@reu.com') {
-      console.log("el usuario es valido")
-      console.log("correo del usuario: " + user.email)
-    } else {
-      alert('usuario no admitido')
-      window.location = '/' 
-      
-    }*/
-      /*
-		  .then(function(){
-			  alert('No autorizado')
-			  props.history.replace('/')
-		  })
-      .catch
-      
-
-    firebase.auth().onAuthStateChanged(function(user) {
-      if (user) {
-        // User is signed in.
-        console.log('si')
-        console.log("Correo lista: " + user.email)
-        var corre = (user.email);
-
-
-        if (corre == 'reu@reu.com') {
-          console.log('usuario permitido')
-        } else {
-          window.location = '/'   
-        }
-
-
-      } else {
-        // No user is signed in.
-        console.log('no')
-        alert('¡POR FAVOR INICIA SESIÓN!')
-        window.location = '/' 
-      }
-    }); */
     return (
       
       <div>
-        {/*<Navbar2/>*/}
       <div class="container">
         
         <div class="panel panel-default">
@@ -524,7 +366,6 @@ class ListaLm2Apro extends Component {
           
           <div class="panel-body">
                     
-            {/*<h4><Link to="/create">Nueva Solicitud <AIcon /> </Link></h4>*/}
             <table class="table table-stripe">
               <thead>
                 <tr>
@@ -553,7 +394,6 @@ class ListaLm2Apro extends Component {
   }
 }
 
-
 class ListaSanCarlosApro extends Component {
   constructor(props) {
     super(props);
@@ -574,8 +414,7 @@ class ListaSanCarlosApro extends Component {
         fechaS,
         destino,
         distrito,
-        estadosoli,
-        
+        estadosoli,        
       });
     });
     this.setState({
@@ -584,84 +423,36 @@ class ListaSanCarlosApro extends Component {
   }
 
   componentDidMount() {
-    this.unsubscribe = this.ref.onSnapshot(this.onCollectionUpdate);
-    
+    this.unsubscribe = this.ref.onSnapshot(this.onCollectionUpdate);    
   }
   
-  
-
   render() {
     
     firebase.auth().onAuthStateChanged(function(user) {
       if (user) {
         // User is signed in.
-        console.log('si')
-        console.log("Correo lista: " + user.email)
+        //console.log('si')
+        //console.log("Correo lista: " + user.email)
        
-
         if (user.email === 'gafretalhuleu@gmail.com' ||
-            user.email === 'victorlloranca@gmail.com') {
-          console.log("el usuario es valido")
-          console.log("correo del usuario: " + user.email)
+            user.email === 'victorlloranca@gmail.com' ||
+            user.email === 'cesarema7@gmail.com') {
+          //console.log("el usuario es valido")
+          //console.log("correo del usuario: " + user.email)
         } else {
-          //alert('usuario no admitido')
-          window.location = '/' 
-          
+          window.location = '/'           
         }
-
-
 
       } else {
         // No user is signed in.
         console.log('no')
-        //alert('¡POR FAVOR INICIA SESIÓN!')
         window.location = '/' 
       }
     });
 
-    /*var user =  firebase.auth().currentUser ;
-    if (user.email === 'reu@reu.com') {
-      console.log("el usuario es valido")
-      console.log("correo del usuario: " + user.email)
-    } else {
-      alert('usuario no admitido')
-      window.location = '/' 
-      
-    }*/
-      /*
-		  .then(function(){
-			  alert('No autorizado')
-			  props.history.replace('/')
-		  })
-      .catch
-      
-
-    firebase.auth().onAuthStateChanged(function(user) {
-      if (user) {
-        // User is signed in.
-        console.log('si')
-        console.log("Correo lista: " + user.email)
-        var corre = (user.email);
-
-
-        if (corre == 'reu@reu.com') {
-          console.log('usuario permitido')
-        } else {
-          window.location = '/'   
-        }
-
-
-      } else {
-        // No user is signed in.
-        console.log('no')
-        alert('¡POR FAVOR INICIA SESIÓN!')
-        window.location = '/' 
-      }
-    }); */
     return (
       
       <div>
-        {/*<Navbar2/>*/}
       <div class="container">
         
         <div class="panel panel-default">
@@ -673,7 +464,6 @@ class ListaSanCarlosApro extends Component {
           
           <div class="panel-body">
                     
-            {/*<h4><Link to="/create">Nueva Solicitud <AIcon /> </Link></h4>*/}
             <table class="table table-stripe">
               <thead>
                 <tr>
@@ -702,7 +492,6 @@ class ListaSanCarlosApro extends Component {
   }
 }
 
-
 class ListaCblancoApro extends Component {
   constructor(props) {
     super(props);
@@ -723,8 +512,7 @@ class ListaCblancoApro extends Component {
         fechaS,
         destino,
         distrito,
-        estadosoli,
-        
+        estadosoli,      
       });
     });
     this.setState({
@@ -733,84 +521,36 @@ class ListaCblancoApro extends Component {
   }
 
   componentDidMount() {
-    this.unsubscribe = this.ref.onSnapshot(this.onCollectionUpdate);
-    
+    this.unsubscribe = this.ref.onSnapshot(this.onCollectionUpdate);    
   }
-  
-  
-
+    
   render() {
     
     firebase.auth().onAuthStateChanged(function(user) {
       if (user) {
         // User is signed in.
-        console.log('si')
-        console.log("Correo lista: " + user.email)
-       
+        //console.log('si')
+        //console.log("Correo lista: " + user.email)      
 
         if (user.email === 'gafretalhuleu@gmail.com' ||
-            user.email === 'victorlloranca@gmail.com') {
-          console.log("el usuario es valido")
-          console.log("correo del usuario: " + user.email)
+            user.email === 'victorlloranca@gmail.com' ||
+            user.email === 'cesarema7@gmail.com') {
+          //console.log("el usuario es valido")
+          //console.log("correo del usuario: " + user.email)
         } else {
-          //alert('usuario no admitido')
-          window.location = '/' 
-          
+          window.location = '/'           
         }
-
-
 
       } else {
         // No user is signed in.
         console.log('no')
-        //alert('¡POR FAVOR INICIA SESIÓN!')
         window.location = '/' 
       }
     });
-
-    /*var user =  firebase.auth().currentUser ;
-    if (user.email === 'reu@reu.com') {
-      console.log("el usuario es valido")
-      console.log("correo del usuario: " + user.email)
-    } else {
-      alert('usuario no admitido')
-      window.location = '/' 
-      
-    }*/
-      /*
-		  .then(function(){
-			  alert('No autorizado')
-			  props.history.replace('/')
-		  })
-      .catch
-      
-
-    firebase.auth().onAuthStateChanged(function(user) {
-      if (user) {
-        // User is signed in.
-        console.log('si')
-        console.log("Correo lista: " + user.email)
-        var corre = (user.email);
-
-
-        if (corre == 'reu@reu.com') {
-          console.log('usuario permitido')
-        } else {
-          window.location = '/'   
-        }
-
-
-      } else {
-        // No user is signed in.
-        console.log('no')
-        alert('¡POR FAVOR INICIA SESIÓN!')
-        window.location = '/' 
-      }
-    }); */
+    
     return (
       
       <div>
-        {/*<Navbar2/>*/}
       <div class="container">
         
         <div class="panel panel-default">
@@ -822,7 +562,6 @@ class ListaCblancoApro extends Component {
           
           <div class="panel-body">
                     
-            {/*<h4><Link to="/create">Nueva Solicitud <AIcon /> </Link></h4>*/}
             <table class="table table-stripe">
               <thead>
                 <tr>
@@ -851,7 +590,6 @@ class ListaCblancoApro extends Component {
   }
 }
 
-
 class ListaSanFelipeApro extends Component {
   constructor(props) {
     super(props);
@@ -872,8 +610,7 @@ class ListaSanFelipeApro extends Component {
         fechaS,
         destino,
         distrito,
-        estadosoli,
-        
+        estadosoli,        
       });
     });
     this.setState({
@@ -882,40 +619,33 @@ class ListaSanFelipeApro extends Component {
   }
 
   componentDidMount() {
-    this.unsubscribe = this.ref.onSnapshot(this.onCollectionUpdate);
-    
+    this.unsubscribe = this.ref.onSnapshot(this.onCollectionUpdate);    
   }
-  
-  
-
+    
   render() {
     firebase.auth().onAuthStateChanged(function(user) {
       if (user) {
         // User is signed in.
-        console.log('si')
-        console.log("Correo lista: " + user.email)
-        var corre = (user.email);
-
+        //console.log('si')
+        //console.log("Correo lista: " + user.email)
 
         if (user.email === 'gafretalhuleu@gmail.com' ||
-            user.email === 'victorlloranca@gmail.com') {
-          console.log('usuario permitido')
+            user.email === 'victorlloranca@gmail.com' ||
+            user.email === 'cesarema7@gmail.com') {
+          //console.log('usuario permitido')
         } else {
           window.location = '/'   
         }
 
-
       } else {
         // No user is signed in.
         console.log('no')
-        //alert('¡POR FAVOR INICIA SESIÓN!')
         window.location = '/' 
       }
     }); 
     return (
       
       <div>
-        {/*<Navbar2/>*/}
       <div class="container">
         
         <div class="panel panel-default">
@@ -954,7 +684,6 @@ class ListaSanFelipeApro extends Component {
   }
 }
 
-
 class ListaSanseApro extends Component {
   constructor(props) {
     super(props);
@@ -975,8 +704,7 @@ class ListaSanseApro extends Component {
         fechaS,
         destino,
         distrito,
-        estadosoli,
-        
+        estadosoli,        
       });
     });
     this.setState({
@@ -985,84 +713,36 @@ class ListaSanseApro extends Component {
   }
 
   componentDidMount() {
-    this.unsubscribe = this.ref.onSnapshot(this.onCollectionUpdate);
-    
+    this.unsubscribe = this.ref.onSnapshot(this.onCollectionUpdate);    
   }
-  
-  
-
+    
   render() {
     
     firebase.auth().onAuthStateChanged(function(user) {
       if (user) {
         // User is signed in.
-        console.log('si')
-        console.log("Correo lista: " + user.email)
-       
+        //console.log('si')
+        //console.log("Correo lista: " + user.email)       
 
         if (user.email === 'gafretalhuleu@gmail.com' ||
-            user.email === 'victorlloranca@gmail.com') {
-          console.log("el usuario es valido")
-          console.log("correo del usuario: " + user.email)
+            user.email === 'victorlloranca@gmail.com' ||
+            user.email === 'cesarema7@gmail.com') {
+          //console.log("el usuario es valido")
+          //console.log("correo del usuario: " + user.email)
         } else {
-          //alert('usuario no admitido')
-          window.location = '/' 
-          
+          window.location = '/'           
         }
-
-
 
       } else {
         // No user is signed in.
         console.log('no')
-        //alert('¡POR FAVOR INICIA SESIÓN!')
         window.location = '/' 
       }
     });
-
-    /*var user =  firebase.auth().currentUser ;
-    if (user.email === 'reu@reu.com') {
-      console.log("el usuario es valido")
-      console.log("correo del usuario: " + user.email)
-    } else {
-      alert('usuario no admitido')
-      window.location = '/' 
-      
-    }*/
-      /*
-		  .then(function(){
-			  alert('No autorizado')
-			  props.history.replace('/')
-		  })
-      .catch
-      
-
-    firebase.auth().onAuthStateChanged(function(user) {
-      if (user) {
-        // User is signed in.
-        console.log('si')
-        console.log("Correo lista: " + user.email)
-        var corre = (user.email);
-
-
-        if (corre == 'reu@reu.com') {
-          console.log('usuario permitido')
-        } else {
-          window.location = '/'   
-        }
-
-
-      } else {
-        // No user is signed in.
-        console.log('no')
-        alert('¡POR FAVOR INICIA SESIÓN!')
-        window.location = '/' 
-      }
-    }); */
+    
     return (
       
       <div>
-        {/*<Navbar2/>*/}
       <div class="container">
         
         <div class="panel panel-default">
@@ -1074,7 +754,6 @@ class ListaSanseApro extends Component {
           
           <div class="panel-body">
                     
-            {/*<h4><Link to="/create">Nueva Solicitud <AIcon /> </Link></h4>*/}
             <table class="table table-stripe">
               <thead>
                 <tr>
@@ -1103,7 +782,6 @@ class ListaSanseApro extends Component {
   }
 }
 
-
 class ListaAsintalApro extends Component {
   constructor(props) {
     super(props);
@@ -1124,8 +802,7 @@ class ListaAsintalApro extends Component {
         fechaS,
         destino,
         distrito,
-        estadosoli,
-        
+        estadosoli,        
       });
     });
     this.setState({
@@ -1134,84 +811,36 @@ class ListaAsintalApro extends Component {
   }
 
   componentDidMount() {
-    this.unsubscribe = this.ref.onSnapshot(this.onCollectionUpdate);
-    
+    this.unsubscribe = this.ref.onSnapshot(this.onCollectionUpdate);    
   }
-  
-  
-
+    
   render() {
     
     firebase.auth().onAuthStateChanged(function(user) {
       if (user) {
         // User is signed in.
-        console.log('si')
-        console.log("Correo lista: " + user.email)
-       
+        //console.log('si')
+        //console.log("Correo lista: " + user.email)       
 
         if (user.email === 'gafretalhuleu@gmail.com' ||
-            user.email === 'victorlloranca@gmail.com') {
-          console.log("el usuario es valido")
-          console.log("correo del usuario: " + user.email)
+            user.email === 'victorlloranca@gmail.com' ||
+            user.email === 'cesarema7@gmail.com') {
+          //console.log("el usuario es valido")
+          //console.log("correo del usuario: " + user.email)
         } else {
-          //alert('usuario no admitido')
-          window.location = '/' 
-          
+          window.location = '/'           
         }
-
-
 
       } else {
         // No user is signed in.
         console.log('no')
-        //alert('¡POR FAVOR INICIA SESIÓN!')
         window.location = '/' 
       }
     });
 
-    /*var user =  firebase.auth().currentUser ;
-    if (user.email === 'reu@reu.com') {
-      console.log("el usuario es valido")
-      console.log("correo del usuario: " + user.email)
-    } else {
-      alert('usuario no admitido')
-      window.location = '/' 
-      
-    }*/
-      /*
-		  .then(function(){
-			  alert('No autorizado')
-			  props.history.replace('/')
-		  })
-      .catch
-      
-
-    firebase.auth().onAuthStateChanged(function(user) {
-      if (user) {
-        // User is signed in.
-        console.log('si')
-        console.log("Correo lista: " + user.email)
-        var corre = (user.email);
-
-
-        if (corre == 'reu@reu.com') {
-          console.log('usuario permitido')
-        } else {
-          window.location = '/'   
-        }
-
-
-      } else {
-        // No user is signed in.
-        console.log('no')
-        alert('¡POR FAVOR INICIA SESIÓN!')
-        window.location = '/' 
-      }
-    }); */
     return (
       
       <div>
-        {/*<Navbar2/>*/}
       <div class="container">
         
         <div class="panel panel-default">
@@ -1223,7 +852,6 @@ class ListaAsintalApro extends Component {
           
           <div class="panel-body">
                     
-            {/*<h4><Link to="/create">Nueva Solicitud <AIcon /> </Link></h4>*/}
             <table class="table table-stripe">
               <thead>
                 <tr>
@@ -1272,8 +900,7 @@ class ListaSanandresApro extends Component {
         fechaS,
         destino,
         distrito,
-        estadosoli,
-        
+        estadosoli,        
       });
     });
     this.setState({
@@ -1282,84 +909,36 @@ class ListaSanandresApro extends Component {
   }
 
   componentDidMount() {
-    this.unsubscribe = this.ref.onSnapshot(this.onCollectionUpdate);
-    
-  }
-  
-  
+    this.unsubscribe = this.ref.onSnapshot(this.onCollectionUpdate);    
+  }    
 
   render() {
     
     firebase.auth().onAuthStateChanged(function(user) {
       if (user) {
         // User is signed in.
-        console.log('si')
-        console.log("Correo lista: " + user.email)
+        //console.log('si')
+        //console.log("Correo lista: " + user.email)
        
-
         if (user.email === 'gafretalhuleu@gmail.com' ||
-            user.email === 'victorlloranca@gmail.com') {
-          console.log("el usuario es valido")
-          console.log("correo del usuario: " + user.email)
+            user.email === 'victorlloranca@gmail.com' ||
+            user.email === 'cesarema7@gmail.com') {
+          //console.log("el usuario es valido")
+          //console.log("correo del usuario: " + user.email)
         } else {
-          //alert('usuario no admitido')
-          window.location = '/' 
-          
+          window.location = '/'           
         }
-
-
 
       } else {
         // No user is signed in.
         console.log('no')
-        //alert('¡POR FAVOR INICIA SESIÓN!')
         window.location = '/' 
       }
     });
 
-    /*var user =  firebase.auth().currentUser ;
-    if (user.email === 'reu@reu.com') {
-      console.log("el usuario es valido")
-      console.log("correo del usuario: " + user.email)
-    } else {
-      alert('usuario no admitido')
-      window.location = '/' 
-      
-    }*/
-      /*
-		  .then(function(){
-			  alert('No autorizado')
-			  props.history.replace('/')
-		  })
-      .catch
-      
-
-    firebase.auth().onAuthStateChanged(function(user) {
-      if (user) {
-        // User is signed in.
-        console.log('si')
-        console.log("Correo lista: " + user.email)
-        var corre = (user.email);
-
-
-        if (corre == 'reu@reu.com') {
-          console.log('usuario permitido')
-        } else {
-          window.location = '/'   
-        }
-
-
-      } else {
-        // No user is signed in.
-        console.log('no')
-        alert('¡POR FAVOR INICIA SESIÓN!')
-        window.location = '/' 
-      }
-    }); */
     return (
       
       <div>
-        {/*<Navbar2/>*/}
       <div class="container">
         
         <div class="panel panel-default">
@@ -1371,7 +950,6 @@ class ListaSanandresApro extends Component {
           
           <div class="panel-body">
                     
-            {/*<h4><Link to="/create">Nueva Solicitud <AIcon /> </Link></h4>*/}
             <table class="table table-stripe">
               <thead>
                 <tr>
@@ -1400,7 +978,6 @@ class ListaSanandresApro extends Component {
   }
 }
 
-
 class ListaSanMartinApro extends Component {
   constructor(props) {
     super(props);
@@ -1421,8 +998,7 @@ class ListaSanMartinApro extends Component {
         fechaS,
         destino,
         distrito,
-        estadosoli,
-        
+        estadosoli,        
       });
     });
     this.setState({
@@ -1431,40 +1007,33 @@ class ListaSanMartinApro extends Component {
   }
 
   componentDidMount() {
-    this.unsubscribe = this.ref.onSnapshot(this.onCollectionUpdate);
-    
+    this.unsubscribe = this.ref.onSnapshot(this.onCollectionUpdate);    
   }
-  
-  
-
+    
   render() {
     firebase.auth().onAuthStateChanged(function(user) {
       if (user) {
         // User is signed in.
-        console.log('si')
-        console.log("Correo lista: " + user.email)
-        var corre = (user.email);
-
-
+        //console.log('si')
+        //console.log("Correo lista: " + user.email)
+        
         if (user.email === 'gafretalhuleu@gmail.com' ||
-            user.email === 'victorlloranca@gmail.com') {
-          console.log('usuario permitido')
+            user.email === 'victorlloranca@gmail.com' ||
+            user.email === 'cesarema7@gmail.com') {
+          //console.log('usuario permitido')
         } else {
           window.location = '/'   
         }
 
-
       } else {
         // No user is signed in.
         console.log('no')
-        //alert('¡POR FAVOR INICIA SESIÓN!')
         window.location = '/' 
       }
     }); 
     return (
       
       <div>
-        {/*<Navbar2/>*/}
       <div class="container">
         
         <div class="panel panel-default">

@@ -4,8 +4,6 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined'
 import withStyles from '@material-ui/core/styles/withStyles'
 import { Link, withRouter } from 'react-router-dom'
 import firebase from '../Firebase'
-import Navbar from './Navbar';
-
 
 const styles = theme => ({
 	main: {
@@ -50,8 +48,8 @@ function Login(props) {
 	//When the form is submitted it will run
 	function onSubmit(e){
 		e.preventDefault()//blocks the postback event of the page
-		console.log('email: '+email)
-		console.log('password: '+password)
+		//console.log('email: '+email)
+		//console.log('password: '+password)
 	}
 
 	return (
@@ -89,8 +87,7 @@ function Login(props) {
 						className={classes.submit}>
 						Iniciar Sesión 
           			</Button>
-                      <div id="contenido"></div>
-					
+                      <div id="contenido"></div>					
 				</form>
 			</Paper>
 			</main>
@@ -179,7 +176,8 @@ function Login(props) {
 			}
 
 			if (email === 'gafretalhuleu@gmail.com' ||
-				email === 'victorlloranca@gmail.com') {
+				email === 'victorlloranca@gmail.com' ||
+				email === 'cesarema7@gmail.com') {
 				props.history.replace('/lista-solicitudes-pendientes')
 				console.log('***********')
 				console.log('vista de los que autorizan: ' + email)				

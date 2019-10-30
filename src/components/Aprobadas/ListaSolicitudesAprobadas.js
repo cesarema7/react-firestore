@@ -1,10 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-
 import firebase from '../../Firebase';
-
-
-
 
 class ListaReuOk extends Component {
   constructor(props) {
@@ -26,8 +22,7 @@ class ListaReuOk extends Component {
         fechaS,
         destino,
         distrito,
-        estadosoli,
-        
+        estadosoli,        
       });
     });
     this.setState({
@@ -36,36 +31,27 @@ class ListaReuOk extends Component {
   }
 
   componentDidMount() {
-    this.unsubscribe = this.ref.onSnapshot(this.onCollectionUpdate);
-    
+    this.unsubscribe = this.ref.onSnapshot(this.onCollectionUpdate);   
   }
-  
-  
 
   render() {
     
     firebase.auth().onAuthStateChanged(function(user) {
       if (user) {
         // User is signed in.
-        console.log('si')
-        console.log("Correo lista: " + user.email)
+        //console.log('si')
+        //console.log("Correo lista: " + user.email)
         
-
         if (user.email === 'bedemo09@yahoo.com') {
-          console.log("el usuario es valido")
-          console.log("correo del usuario: " + user.email)
+          //console.log("el usuario es valido")
+          //console.log("correo del usuario: " + user.email)
         } else {
-          //alert('usuario no admitido')
-          window.location = '/' 
-          
+          window.location = '/'           
         }
-
-
 
       } else {
         // No user is signed in.
         console.log('no')
-        //alert('¡POR FAVOR INICIA SESIÓN!')
         window.location = '/' 
       }
     });
@@ -73,8 +59,7 @@ class ListaReuOk extends Component {
     return (
       
       <div>
-      <div class="container">
-        
+      <div class="container">        
         <div class="panel panel-default">
           <div class="panel-heading">
             <h3 class="panel-title">
@@ -112,7 +97,6 @@ class ListaReuOk extends Component {
   }
 }
 
-
 class ListaChampericoOk extends Component {
   constructor(props) {
     super(props);
@@ -133,8 +117,7 @@ class ListaChampericoOk extends Component {
         fechaS,
         destino,
         distrito,
-        estadosoli,
-        
+        estadosoli,        
       });
     });
     this.setState({
@@ -146,80 +129,32 @@ class ListaChampericoOk extends Component {
     this.unsubscribe = this.ref.onSnapshot(this.onCollectionUpdate);
     
   }
-  
-  
 
   render() {
     
     firebase.auth().onAuthStateChanged(function(user) {
       if (user) {
         // User is signed in.
-        console.log('si')
-        console.log("Correo lista: " + user.email)
-       
+        //console.log('si')
+        //console.log("Correo lista: " + user.email)       
 
         if (user.email === 'bedemo09@yahoo.com') {
-          console.log("el usuario es valido")
-          console.log("correo del usuario: " + user.email)
+          //console.log("el usuario es valido")
+          //console.log("correo del usuario: " + user.email)
         } else {
-          //alert('usuario no admitido')
-          window.location = '/' 
-          
+          window.location = '/'           
         }
-
-
 
       } else {
         // No user is signed in.
         console.log('no')
-        //alert('¡POR FAVOR INICIA SESIÓN!')
         window.location = '/' 
       }
     });
 
-    /*var user =  firebase.auth().currentUser ;
-    if (user.email === 'reu@reu.com') {
-      console.log("el usuario es valido")
-      console.log("correo del usuario: " + user.email)
-    } else {
-      alert('usuario no admitido')
-      window.location = '/' 
-      
-    }*/
-      /*
-		  .then(function(){
-			  alert('No autorizado')
-			  props.history.replace('/')
-		  })
-      .catch
-      
-
-    firebase.auth().onAuthStateChanged(function(user) {
-      if (user) {
-        // User is signed in.
-        console.log('si')
-        console.log("Correo lista: " + user.email)
-        var corre = (user.email);
-
-
-        if (corre == 'reu@reu.com') {
-          console.log('usuario permitido')
-        } else {
-          window.location = '/'   
-        }
-
-
-      } else {
-        // No user is signed in.
-        console.log('no')
-        alert('¡POR FAVOR INICIA SESIÓN!')
-        window.location = '/' 
-      }
-    }); */
     return (
       
       <div>
-        {/*<Navbar2/>*/}
       <div class="container">
         
         <div class="panel panel-default">
@@ -231,7 +166,6 @@ class ListaChampericoOk extends Component {
           
           <div class="panel-body">
                     
-            {/*<h4><Link to="/create">Nueva Solicitud <AIcon /> </Link></h4>*/}
             <table class="table table-stripe">
               <thead>
                 <tr>
@@ -280,8 +214,7 @@ class ListaMuluaOk extends Component {
         fechaS,
         destino,
         distrito,
-        estadosoli,
-        
+        estadosoli,       
       });
     });
     this.setState({
@@ -293,80 +226,32 @@ class ListaMuluaOk extends Component {
     this.unsubscribe = this.ref.onSnapshot(this.onCollectionUpdate);
     
   }
-  
-  
 
   render() {
     
     firebase.auth().onAuthStateChanged(function(user) {
       if (user) {
         // User is signed in.
-        console.log('si')
-        console.log("Correo lista: " + user.email)
+        //console.log('si')
+        //console.log("Correo lista: " + user.email)
        
-
         if (user.email === 'bedemo09@yahoo.com') {
-          console.log("el usuario es valido")
-          console.log("correo del usuario: " + user.email)
+          //console.log("el usuario es valido")
+          //console.log("correo del usuario: " + user.email)
         } else {
-          //alert('usuario no admitido')
-          window.location = '/' 
-          
+          window.location = '/'           
         }
-
-
 
       } else {
         // No user is signed in.
         console.log('no')
-        //alert('¡POR FAVOR INICIA SESIÓN!')
         window.location = '/' 
       }
     });
 
-    /*var user =  firebase.auth().currentUser ;
-    if (user.email === 'reu@reu.com') {
-      console.log("el usuario es valido")
-      console.log("correo del usuario: " + user.email)
-    } else {
-      alert('usuario no admitido')
-      window.location = '/' 
-      
-    }*/
-      /*
-		  .then(function(){
-			  alert('No autorizado')
-			  props.history.replace('/')
-		  })
-      .catch
-      
-
-    firebase.auth().onAuthStateChanged(function(user) {
-      if (user) {
-        // User is signed in.
-        console.log('si')
-        console.log("Correo lista: " + user.email)
-        var corre = (user.email);
-
-
-        if (corre == 'reu@reu.com') {
-          console.log('usuario permitido')
-        } else {
-          window.location = '/'   
-        }
-
-
-      } else {
-        // No user is signed in.
-        console.log('no')
-        alert('¡POR FAVOR INICIA SESIÓN!')
-        window.location = '/' 
-      }
-    }); */
     return (
       
       <div>
-        {/*<Navbar2/>*/}
       <div class="container">
         
         <div class="panel panel-default">
@@ -378,7 +263,6 @@ class ListaMuluaOk extends Component {
           
           <div class="panel-body">
                     
-            {/*<h4><Link to="/create">Nueva Solicitud <AIcon /> </Link></h4>*/}
             <table class="table table-stripe">
               <thead>
                 <tr>
@@ -407,7 +291,6 @@ class ListaMuluaOk extends Component {
   }
 }
 
-
 class ListaLm2Ok extends Component {
   constructor(props) {
     super(props);
@@ -428,8 +311,7 @@ class ListaLm2Ok extends Component {
         fechaS,
         destino,
         distrito,
-        estadosoli,
-        
+        estadosoli,       
       });
     });
     this.setState({
@@ -446,69 +328,26 @@ class ListaLm2Ok extends Component {
     firebase.auth().onAuthStateChanged(function(user) {
       if (user) {
         // User is signed in.
-        console.log('si')
-        console.log("Correo lista: " + user.email)
+        //console.log('si')
+        //console.log("Correo lista: " + user.email)
        
         if (user.email === 'bedemo09@yahoo.com') {
-          console.log("el usuario es valido")
-          console.log("correo del usuario: " + user.email)
+          //console.log("el usuario es valido")
+          //console.log("correo del usuario: " + user.email)
         } else {
-          //alert('usuario no admitido')
-          window.location = '/' 
-          
+          window.location = '/'           
         }
 
       } else {
         // No user is signed in.
         console.log('no')
-        //alert('¡POR FAVOR INICIA SESIÓN!')
         window.location = '/' 
       }
     });
 
-    /*var user =  firebase.auth().currentUser ;
-    if (user.email === 'reu@reu.com') {
-      console.log("el usuario es valido")
-      console.log("correo del usuario: " + user.email)
-    } else {
-      alert('usuario no admitido')
-      window.location = '/' 
-      
-    }*/
-      /*
-		  .then(function(){
-			  alert('No autorizado')
-			  props.history.replace('/')
-		  })
-      .catch
-      
-
-    firebase.auth().onAuthStateChanged(function(user) {
-      if (user) {
-        // User is signed in.
-        console.log('si')
-        console.log("Correo lista: " + user.email)
-        var corre = (user.email);
-
-
-        if (corre == 'reu@reu.com') {
-          console.log('usuario permitido')
-        } else {
-          window.location = '/'   
-        }
-
-
-      } else {
-        // No user is signed in.
-        console.log('no')
-        alert('¡POR FAVOR INICIA SESIÓN!')
-        window.location = '/' 
-      }
-    }); */
     return (
       
       <div>
-        {/*<Navbar2/>*/}
       <div class="container">
         
         <div class="panel panel-default">
@@ -520,7 +359,6 @@ class ListaLm2Ok extends Component {
           
           <div class="panel-body">
                     
-            {/*<h4><Link to="/create">Nueva Solicitud <AIcon /> </Link></h4>*/}
             <table class="table table-stripe">
               <thead>
                 <tr>
@@ -549,7 +387,6 @@ class ListaLm2Ok extends Component {
   }
 }
 
-
 class ListaSanCarlosOk extends Component {
   constructor(props) {
     super(props);
@@ -570,8 +407,7 @@ class ListaSanCarlosOk extends Component {
         fechaS,
         destino,
         distrito,
-        estadosoli,
-        
+        estadosoli,   
       });
     });
     this.setState({
@@ -580,83 +416,35 @@ class ListaSanCarlosOk extends Component {
   }
 
   componentDidMount() {
-    this.unsubscribe = this.ref.onSnapshot(this.onCollectionUpdate);
-    
+    this.unsubscribe = this.ref.onSnapshot(this.onCollectionUpdate);  
   }
   
-  
-
   render() {
     
     firebase.auth().onAuthStateChanged(function(user) {
       if (user) {
         // User is signed in.
-        console.log('si')
-        console.log("Correo lista: " + user.email)
+        //console.log('si')
+        //console.log("Correo lista: " + user.email)
        
-
         if (user.email === 'bedemo09@yahoo.com') {
-          console.log("el usuario es valido")
-          console.log("correo del usuario: " + user.email)
+          //console.log("el usuario es valido")
+          //console.log("correo del usuario: " + user.email)
         } else {
           //alert('usuario no admitido')
-          window.location = '/' 
-          
+          window.location = '/'           
         }
-
-
 
       } else {
         // No user is signed in.
         console.log('no')
-        //alert('¡POR FAVOR INICIA SESIÓN!')
         window.location = '/' 
       }
     });
 
-    /*var user =  firebase.auth().currentUser ;
-    if (user.email === 'reu@reu.com') {
-      console.log("el usuario es valido")
-      console.log("correo del usuario: " + user.email)
-    } else {
-      alert('usuario no admitido')
-      window.location = '/' 
-      
-    }*/
-      /*
-		  .then(function(){
-			  alert('No autorizado')
-			  props.history.replace('/')
-		  })
-      .catch
-      
-
-    firebase.auth().onAuthStateChanged(function(user) {
-      if (user) {
-        // User is signed in.
-        console.log('si')
-        console.log("Correo lista: " + user.email)
-        var corre = (user.email);
-
-
-        if (corre == 'reu@reu.com') {
-          console.log('usuario permitido')
-        } else {
-          window.location = '/'   
-        }
-
-
-      } else {
-        // No user is signed in.
-        console.log('no')
-        alert('¡POR FAVOR INICIA SESIÓN!')
-        window.location = '/' 
-      }
-    }); */
     return (
       
       <div>
-        {/*<Navbar2/>*/}
       <div class="container">
         
         <div class="panel panel-default">
@@ -668,7 +456,6 @@ class ListaSanCarlosOk extends Component {
           
           <div class="panel-body">
                     
-            {/*<h4><Link to="/create">Nueva Solicitud <AIcon /> </Link></h4>*/}
             <table class="table table-stripe">
               <thead>
                 <tr>
@@ -697,7 +484,6 @@ class ListaSanCarlosOk extends Component {
   }
 }
 
-
 class ListaCblancoOk extends Component {
   constructor(props) {
     super(props);
@@ -718,8 +504,7 @@ class ListaCblancoOk extends Component {
         fechaS,
         destino,
         distrito,
-        estadosoli,
-        
+        estadosoli,        
       });
     });
     this.setState({
@@ -728,83 +513,34 @@ class ListaCblancoOk extends Component {
   }
 
   componentDidMount() {
-    this.unsubscribe = this.ref.onSnapshot(this.onCollectionUpdate);
-    
+    this.unsubscribe = this.ref.onSnapshot(this.onCollectionUpdate);    
   }
-  
-  
-
+    
   render() {
     
     firebase.auth().onAuthStateChanged(function(user) {
       if (user) {
         // User is signed in.
-        console.log('si')
-        console.log("Correo lista: " + user.email)
+        //console.log('si')
+        //console.log("Correo lista: " + user.email)
        
-
         if (user.email === 'bedemo09@yahoo.com') {
-          console.log("el usuario es valido")
-          console.log("correo del usuario: " + user.email)
+          //console.log("el usuario es valido")
+          //console.log("correo del usuario: " + user.email)
         } else {
-          //alert('usuario no admitido')
-          window.location = '/' 
-          
+          window.location = '/'           
         }
-
-
 
       } else {
         // No user is signed in.
         console.log('no')
-        //alert('¡POR FAVOR INICIA SESIÓN!')
         window.location = '/' 
       }
     });
 
-    /*var user =  firebase.auth().currentUser ;
-    if (user.email === 'reu@reu.com') {
-      console.log("el usuario es valido")
-      console.log("correo del usuario: " + user.email)
-    } else {
-      alert('usuario no admitido')
-      window.location = '/' 
-      
-    }*/
-      /*
-		  .then(function(){
-			  alert('No autorizado')
-			  props.history.replace('/')
-		  })
-      .catch
-      
-
-    firebase.auth().onAuthStateChanged(function(user) {
-      if (user) {
-        // User is signed in.
-        console.log('si')
-        console.log("Correo lista: " + user.email)
-        var corre = (user.email);
-
-
-        if (corre == 'reu@reu.com') {
-          console.log('usuario permitido')
-        } else {
-          window.location = '/'   
-        }
-
-
-      } else {
-        // No user is signed in.
-        console.log('no')
-        alert('¡POR FAVOR INICIA SESIÓN!')
-        window.location = '/' 
-      }
-    }); */
     return (
       
       <div>
-        {/*<Navbar2/>*/}
       <div class="container">
         
         <div class="panel panel-default">
@@ -816,7 +552,6 @@ class ListaCblancoOk extends Component {
           
           <div class="panel-body">
                     
-            {/*<h4><Link to="/create">Nueva Solicitud <AIcon /> </Link></h4>*/}
             <table class="table table-stripe">
               <thead>
                 <tr>
@@ -845,7 +580,6 @@ class ListaCblancoOk extends Component {
   }
 }
 
-
 class ListaSanFelipeOk extends Component {
   constructor(props) {
     super(props);
@@ -866,8 +600,7 @@ class ListaSanFelipeOk extends Component {
         fechaS,
         destino,
         distrito,
-        estadosoli,
-        
+        estadosoli,        
       });
     });
     this.setState({
@@ -876,39 +609,31 @@ class ListaSanFelipeOk extends Component {
   }
 
   componentDidMount() {
-    this.unsubscribe = this.ref.onSnapshot(this.onCollectionUpdate);
-    
+    this.unsubscribe = this.ref.onSnapshot(this.onCollectionUpdate);    
   }
-  
-  
-
+    
   render() {
     firebase.auth().onAuthStateChanged(function(user) {
       if (user) {
         // User is signed in.
-        console.log('si')
-        console.log("Correo lista: " + user.email)
-        var corre = (user.email);
-
+        //console.log('si')
+        //console.log("Correo lista: " + user.email)
 
         if (user.email === 'bedemo09@yahoo.com') {
-          console.log('usuario permitido')
+          //console.log('usuario permitido')
         } else {
           window.location = '/'   
         }
 
-
       } else {
         // No user is signed in.
         console.log('no')
-        //alert('¡POR FAVOR INICIA SESIÓN!')
         window.location = '/' 
       }
     }); 
     return (
       
       <div>
-        {/*<Navbar2/>*/}
       <div class="container">
         
         <div class="panel panel-default">
@@ -947,7 +672,6 @@ class ListaSanFelipeOk extends Component {
   }
 }
 
-
 class ListaSanseOk extends Component {
   constructor(props) {
     super(props);
@@ -968,8 +692,7 @@ class ListaSanseOk extends Component {
         fechaS,
         destino,
         distrito,
-        estadosoli,
-        
+        estadosoli,        
       });
     });
     this.setState({
@@ -978,83 +701,34 @@ class ListaSanseOk extends Component {
   }
 
   componentDidMount() {
-    this.unsubscribe = this.ref.onSnapshot(this.onCollectionUpdate);
-    
-  }
-  
-  
+    this.unsubscribe = this.ref.onSnapshot(this.onCollectionUpdate);    
+  }    
 
   render() {
     
     firebase.auth().onAuthStateChanged(function(user) {
       if (user) {
         // User is signed in.
-        console.log('si')
-        console.log("Correo lista: " + user.email)
+        //console.log('si')
+        //console.log("Correo lista: " + user.email)
        
-
         if (user.email === 'bedemo09@yahoo.com') {
-          console.log("el usuario es valido")
-          console.log("correo del usuario: " + user.email)
+          //console.log("el usuario es valido")
+          //console.log("correo del usuario: " + user.email)
         } else {
-          //alert('usuario no admitido')
-          window.location = '/' 
-          
+          window.location = '/'           
         }
-
-
 
       } else {
         // No user is signed in.
         console.log('no')
-        //alert('¡POR FAVOR INICIA SESIÓN!')
         window.location = '/' 
       }
     });
 
-    /*var user =  firebase.auth().currentUser ;
-    if (user.email === 'reu@reu.com') {
-      console.log("el usuario es valido")
-      console.log("correo del usuario: " + user.email)
-    } else {
-      alert('usuario no admitido')
-      window.location = '/' 
-      
-    }*/
-      /*
-		  .then(function(){
-			  alert('No autorizado')
-			  props.history.replace('/')
-		  })
-      .catch
-      
-
-    firebase.auth().onAuthStateChanged(function(user) {
-      if (user) {
-        // User is signed in.
-        console.log('si')
-        console.log("Correo lista: " + user.email)
-        var corre = (user.email);
-
-
-        if (corre == 'reu@reu.com') {
-          console.log('usuario permitido')
-        } else {
-          window.location = '/'   
-        }
-
-
-      } else {
-        // No user is signed in.
-        console.log('no')
-        alert('¡POR FAVOR INICIA SESIÓN!')
-        window.location = '/' 
-      }
-    }); */
     return (
       
       <div>
-        {/*<Navbar2/>*/}
       <div class="container">
         
         <div class="panel panel-default">
@@ -1066,7 +740,6 @@ class ListaSanseOk extends Component {
           
           <div class="panel-body">
                     
-            {/*<h4><Link to="/create">Nueva Solicitud <AIcon /> </Link></h4>*/}
             <table class="table table-stripe">
               <thead>
                 <tr>
@@ -1095,7 +768,6 @@ class ListaSanseOk extends Component {
   }
 }
 
-
 class ListaAsintalOk extends Component {
   constructor(props) {
     super(props);
@@ -1116,8 +788,7 @@ class ListaAsintalOk extends Component {
         fechaS,
         destino,
         distrito,
-        estadosoli,
-        
+        estadosoli,        
       });
     });
     this.setState({
@@ -1126,83 +797,34 @@ class ListaAsintalOk extends Component {
   }
 
   componentDidMount() {
-    this.unsubscribe = this.ref.onSnapshot(this.onCollectionUpdate);
-    
-  }
-  
-  
+    this.unsubscribe = this.ref.onSnapshot(this.onCollectionUpdate);    
+  }    
 
   render() {
     
     firebase.auth().onAuthStateChanged(function(user) {
       if (user) {
         // User is signed in.
-        console.log('si')
-        console.log("Correo lista: " + user.email)
-       
+        //console.log('si')
+        //console.log("Correo lista: " + user.email)       
 
         if (user.email === 'bedemo09@yahoo.com') {
-          console.log("el usuario es valido")
-          console.log("correo del usuario: " + user.email)
+          //console.log("el usuario es valido")
+          //console.log("correo del usuario: " + user.email)
         } else {
-          //alert('usuario no admitido')
-          window.location = '/' 
-          
+          window.location = '/'           
         }
-
-
 
       } else {
         // No user is signed in.
         console.log('no')
-        //alert('¡POR FAVOR INICIA SESIÓN!')
         window.location = '/' 
       }
     });
 
-    /*var user =  firebase.auth().currentUser ;
-    if (user.email === 'reu@reu.com') {
-      console.log("el usuario es valido")
-      console.log("correo del usuario: " + user.email)
-    } else {
-      alert('usuario no admitido')
-      window.location = '/' 
-      
-    }*/
-      /*
-		  .then(function(){
-			  alert('No autorizado')
-			  props.history.replace('/')
-		  })
-      .catch
-      
-
-    firebase.auth().onAuthStateChanged(function(user) {
-      if (user) {
-        // User is signed in.
-        console.log('si')
-        console.log("Correo lista: " + user.email)
-        var corre = (user.email);
-
-
-        if (corre == 'reu@reu.com') {
-          console.log('usuario permitido')
-        } else {
-          window.location = '/'   
-        }
-
-
-      } else {
-        // No user is signed in.
-        console.log('no')
-        alert('¡POR FAVOR INICIA SESIÓN!')
-        window.location = '/' 
-      }
-    }); */
     return (
       
       <div>
-        {/*<Navbar2/>*/}
       <div class="container">
         
         <div class="panel panel-default">
@@ -1214,7 +836,6 @@ class ListaAsintalOk extends Component {
           
           <div class="panel-body">
                     
-            {/*<h4><Link to="/create">Nueva Solicitud <AIcon /> </Link></h4>*/}
             <table class="table table-stripe">
               <thead>
                 <tr>
@@ -1263,8 +884,7 @@ class ListaSanandresOk extends Component {
         fechaS,
         destino,
         distrito,
-        estadosoli,
-        
+        estadosoli,        
       });
     });
     this.setState({
@@ -1273,83 +893,34 @@ class ListaSanandresOk extends Component {
   }
 
   componentDidMount() {
-    this.unsubscribe = this.ref.onSnapshot(this.onCollectionUpdate);
-    
-  }
-  
-  
+    this.unsubscribe = this.ref.onSnapshot(this.onCollectionUpdate);    
+  }    
 
   render() {
     
     firebase.auth().onAuthStateChanged(function(user) {
       if (user) {
         // User is signed in.
-        console.log('si')
-        console.log("Correo lista: " + user.email)
-       
+        //console.log('si')
+        //console.log("Correo lista: " + user.email)       
 
         if (user.email === 'bedemo09@yahoo.com') {
-          console.log("el usuario es valido")
-          console.log("correo del usuario: " + user.email)
+          //console.log("el usuario es valido")
+          //console.log("correo del usuario: " + user.email)
         } else {
-          //alert('usuario no admitido')
-          window.location = '/' 
-          
+          window.location = '/'           
         }
-
-
 
       } else {
         // No user is signed in.
         console.log('no')
-        //alert('¡POR FAVOR INICIA SESIÓN!')
         window.location = '/' 
       }
     });
 
-    /*var user =  firebase.auth().currentUser ;
-    if (user.email === 'reu@reu.com') {
-      console.log("el usuario es valido")
-      console.log("correo del usuario: " + user.email)
-    } else {
-      alert('usuario no admitido')
-      window.location = '/' 
-      
-    }*/
-      /*
-		  .then(function(){
-			  alert('No autorizado')
-			  props.history.replace('/')
-		  })
-      .catch
-      
-
-    firebase.auth().onAuthStateChanged(function(user) {
-      if (user) {
-        // User is signed in.
-        console.log('si')
-        console.log("Correo lista: " + user.email)
-        var corre = (user.email);
-
-
-        if (corre == 'reu@reu.com') {
-          console.log('usuario permitido')
-        } else {
-          window.location = '/'   
-        }
-
-
-      } else {
-        // No user is signed in.
-        console.log('no')
-        alert('¡POR FAVOR INICIA SESIÓN!')
-        window.location = '/' 
-      }
-    }); */
     return (
       
       <div>
-        {/*<Navbar2/>*/}
       <div class="container">
         
         <div class="panel panel-default">
@@ -1361,7 +932,6 @@ class ListaSanandresOk extends Component {
           
           <div class="panel-body">
                     
-            {/*<h4><Link to="/create">Nueva Solicitud <AIcon /> </Link></h4>*/}
             <table class="table table-stripe">
               <thead>
                 <tr>
@@ -1390,7 +960,6 @@ class ListaSanandresOk extends Component {
   }
 }
 
-
 class ListaSanMartinOk extends Component {
   constructor(props) {
     super(props);
@@ -1411,8 +980,7 @@ class ListaSanMartinOk extends Component {
         fechaS,
         destino,
         distrito,
-        estadosoli,
-        
+        estadosoli,        
       });
     });
     this.setState({
@@ -1421,39 +989,32 @@ class ListaSanMartinOk extends Component {
   }
 
   componentDidMount() {
-    this.unsubscribe = this.ref.onSnapshot(this.onCollectionUpdate);
-    
-  }
-  
-  
+    this.unsubscribe = this.ref.onSnapshot(this.onCollectionUpdate);    
+  }    
 
   render() {
     firebase.auth().onAuthStateChanged(function(user) {
       if (user) {
         // User is signed in.
-        console.log('si')
-        console.log("Correo lista: " + user.email)
-        var corre = (user.email);
-
-
+        //console.log('si')
+        //console.log("Correo lista: " + user.email)
+       
         if (user.email === 'bedemo09@yahoo.com') {
-          console.log('usuario permitido')
+          //console.log('usuario permitido')
         } else {
           window.location = '/'   
         }
 
-
       } else {
         // No user is signed in.
         console.log('no')
-        //alert('¡POR FAVOR INICIA SESIÓN!')
         window.location = '/' 
       }
     }); 
+
     return (
       
       <div>
-        {/*<Navbar2/>*/}
       <div class="container">
         
         <div class="panel panel-default">

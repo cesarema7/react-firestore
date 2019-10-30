@@ -95,8 +95,7 @@ class EditarAsintal extends Component {
         fechaR: '',
         autorizada: ''
       });
-      //this.props.history.push("/show/"+this.props.match.params.id)
-      this.props.history.push("/lista-solicitudes-el-asintal")
+      window.location ="https://control-ambulancias-d69ec.firebaseapp.com/lista-solicitudes-pendientes"
     })
     .catch((error) => {
       console.error("Error adding document: ", error);
@@ -108,25 +107,19 @@ class EditarAsintal extends Component {
     firebase.auth().onAuthStateChanged(function(user) {
       if (user) {
         // User is signed in.
-        console.log('si')
-        console.log("Correo lista: " + user.email)
+        //console.log('si')
+        //console.log("Correo lista: " + user.email)
        
-
-        if (user.email === 'capelasintal@gmail.com') {
-          console.log("el usuario es valido")
-          console.log("correo del usuario: " + user.email)
+        if (user.email === 'cesarema7@gmail.com') {
+          //console.log("el usuario es valido")
+          //console.log("correo del usuario: " + user.email)
         } else {
-          //alert('usuario no admitido')
-          window.location = '/' 
-          
+          window.location = '/'           
         }
-
-
 
       } else {
         // No user is signed in.
         console.log('no')
-        //alert('¡POR FAVOR INICIA SESIÓN!')
         window.location = '/' 
       }
     });
@@ -138,9 +131,9 @@ class EditarAsintal extends Component {
           <Grid container spacing={3}>
             <Grid className="mx-auto">
               <div>
-              <h4><Link to={`/detalle-solicitud-el-asintal/${this.state.key}`} class="btn btn-primary">Volver a detalles de solicitud ASINTAL</Link></h4>
-			  </div>
-			  <div>
+                <h4><Link to={`/detalle-solicitud-el-asintal/${this.state.key}`} class="btn btn-primary">Volver a detalles de solicitud ASINTAL</Link></h4>
+              </div>
+              <div>
                 <h1 className="text-center font-weight-bold">
                   Solicitud de Combustible
                 </h1>
@@ -168,47 +161,35 @@ class EditarAsintal extends Component {
                   id="distrito"
                   name="distrito"
                   label="Distrito al que pertenece éste usuario:"
-
                   disabled
-
-
-                  // medio funciona   value={distrito , 'ejemplo'}
-
-
-                  //value="asdfasdf"
                   value={this.state.distrito}
                   onChange={this.onChange}
                   margin="normal"
                   fullWidth
                 />
 
+                <TextField
+                  id="destino"
+                  name="destino"
+                  value={this.state.destino}
+                  onChange={this.onChange}
+                  fullWidth
+                  type="text"
+                  InputProps={{
+                    startAdornment: (
+                      <InputAdornment position="start">Destino:</InputAdornment>
+                    )
+                  }}
+                />
                 
-
-				<TextField
-          id="destino"
-          name="destino"
-                    value={this.state.destino}
-                    onChange={this.onChange}
-                    fullWidth
-                    type="text"
-                    InputProps={{
-                      startAdornment: (
-                        <InputAdornment position="start">Destino:</InputAdornment>
-                      )
-                    }}
-                  >
-                    
-                  </TextField>
-						
                 </div>
                 <div className="mt-4">
                   <TextField
-            id="vehiculo"
-            name="vehiculo"
-            value={this.state.vehiculo}
-          
-          type="text"
-          onChange={this.onChange}
+                    id="vehiculo"
+                    name="vehiculo"
+                    value={this.state.vehiculo}
+                    type="text"
+                    onChange={this.onChange}
                     fullWidth
                     InputProps={{
                       startAdornment: (
@@ -217,10 +198,8 @@ class EditarAsintal extends Component {
                         </InputAdornment>
                       )
                     }}
-                  >
+                  />
                    
-                  </TextField>
-
                   <TextField
                     id="placa"
                     name="placa"
@@ -258,8 +237,7 @@ class EditarAsintal extends Component {
                   id="cantidad"
                   name="cantidad"
                   label="Cantidad de Combustible que Solicita en Quetzales: "
-                  value={this.state.cantidad}
-                  
+                  value={this.state.cantidad}                  
                   onChange={this.onChange}
                   margin="normal"
                   fullWidth
@@ -270,8 +248,7 @@ class EditarAsintal extends Component {
                   id="detalle"
                   name="detalle"
                   label="Detalle de comisión: "
-                  value={this.state.detalle}
-                  
+                  value={this.state.detalle}                  
                   onChange={this.onChange}
                   margin="normal"
                   fullWidth
@@ -281,27 +258,25 @@ class EditarAsintal extends Component {
 
               <div className="mt-4">
               <h6>Fecha y Hora de Salida / Regreso</h6>
-                <Grid container justify="center">
-                  
+                <Grid container justify="center">                  
                   <Grid item xs={5}>
                     <TextField
                       id="fechaS"
                       name="fechaS"
                       label="Salida: "
                       type="datetime-local"
-					  InputLabelProps={{ shrink: true, }}
+					            InputLabelProps={{ shrink: true, }}
                       value={this.state.fechaS}
-                      
-          onChange={this.onChange}
+                      onChange={this.onChange}
                     />
                   </Grid>
                   <Grid item xs={5}>
                     <TextField
-            id="piloto"
-            name="piloto"
+                      id="piloto"
+                      name="piloto"
                       value={this.state.piloto}
                       type="text"
-          onChange={this.onChange}
+                      onChange={this.onChange}
                       fullWidth
                       InputProps={{
                         startAdornment: (
@@ -311,9 +286,8 @@ class EditarAsintal extends Component {
                         )
                       }}
                       className="mt-3"
-                    >
+                    />
                       
-                    </TextField>
                   </Grid>
                 </Grid>
               </div>
@@ -326,20 +300,19 @@ class EditarAsintal extends Component {
                       name="fechaR"
                       label="Retorno: "
                       type="date"
-					  InputLabelProps={{ shrink: true, }}
-                      value={this.state.fechaR}
-                      
-          onChange={this.onChange}
+					            InputLabelProps={{ shrink: true, }}
+                      value={this.state.fechaR}                      
+                      onChange={this.onChange}
                     />
                   </Grid>
                   
                   <Grid item xs={5}>
                     <TextField
-            id="autorizada"
-            name="autorizada"
+                      id="autorizada"
+                      name="autorizada"
                       value={this.state.autorizada}
                       type="text"
-          onChange={this.onChange}
+                      onChange={this.onChange}
                       fullWidth
                       InputProps={{
                         startAdornment: (
@@ -349,9 +322,8 @@ class EditarAsintal extends Component {
                         )
                       }}
                       className="mt-3"
-                    >
+                    />
                       
-                    </TextField>
                   </Grid>
                   
                 </Grid>
@@ -363,16 +335,10 @@ class EditarAsintal extends Component {
                   Actualizar Solicitud
                 </Fab>
               </div>
-              
-              
-            </Grid>
-            
+            </Grid>            
           </Grid>
         </div>
       </div>
-
-
-
     );
   }
 }
