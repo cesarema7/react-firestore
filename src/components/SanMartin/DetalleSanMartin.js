@@ -60,18 +60,20 @@ class DetalleSanMartin extends Component {
   }
 
   render() {
+
     firebase.auth().onAuthStateChanged(function(user) {
       if (user) {
         // User is signed in.
-        console.log('si')
+        //console.log('si')
 
 
         if (user.email === 'puestosanmartin@gmail.com' || 
             user.email === 'bedemo09@yahoo.com' || 
             user.email === 'victorlloranca@gmail.com' || 
-            user.email === 'gafretalhuleu@gmail.com') {
-          console.log("el usuario es valido")
-          console.log("correo del usuario: " + user.email)
+            user.email === 'gafretalhuleu@gmail.com' || 
+            user.email === 'cesarema7@gmail.com') {
+          //console.log("el usuario es valido")
+          //console.log("correo del usuario: " + user.email)
 
           if (user.email === 'victorlloranca@gmail.com' || user.email === 'gafretalhuleu@gmail.com') {
             var btn_aprobado = document.getElementById('btn-aprobado');
@@ -124,17 +126,29 @@ class DetalleSanMartin extends Component {
             btn_rechazado.style.display = 'none';
           }
 
+          if (user.email === 'cesarema7@gmail.com') {
+            var btn_aprobado = document.getElementById('btn-aprobado');
+            btn_aprobado.style.display = 'inline';
+            var btn_editar = document.getElementById('btn-editar');
+            btn_editar.style.display = 'inline';
+            var btn_eliminar= document.getElementById('btn-eliminar');
+            btn_eliminar.style.display = 'inline';
+            var btn_ls= document.getElementById('btn-ls');
+            btn_ls.style.display = 'inline';
+            var btn_lsr= document.getElementById('btn-lsr');
+            btn_lsr.style.display = 'none';
+            var btn_lsa= document.getElementById('btn-lsa');
+            btn_lsa.style.display = 'none';
+            var btn_rechazado= document.getElementById('btn-rechazado');
+            btn_rechazado.style.display = 'inline';
+          }
+
         } else {
-          //alert('usuario no admitido')
-          window.location = '/' 
-          
+          window.location = '/'
         }
-
-
       } else {
         // No user is signed in.
-        console.log('no')
-        //alert('¡POR FAVOR INICIA SESIÓN!')
+        console.log('no')        
         window.location = '/' 
       }
     });

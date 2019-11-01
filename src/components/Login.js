@@ -54,10 +54,7 @@ function Login(props) {
 
 	return (
 		
-		<div>			
-			<div>
-				{/*<Navbar/>*/}
-			</div>
+		<div>
 			<main className={classes.main}>
 			
 			<Paper className={classes.paper}>
@@ -94,7 +91,6 @@ function Login(props) {
 		</div>
     )
     
-
     function onLogin(){
         var email = document.getElementById('email').value;
         var password = document.getElementById('password').value;
@@ -154,7 +150,7 @@ function Login(props) {
 			if (email === 'capelasintal@gmail.com') {
 				props.history.replace('/lista-solicitudes-el-asintal')
 				console.log('***********')
-				console.log('vista de san sebastián: ' + email)				
+				console.log('vista de el asintal: ' + email)				
 			}
 
 			if (email === 'distritos.a.v.s.10reu@hotmail.com') {

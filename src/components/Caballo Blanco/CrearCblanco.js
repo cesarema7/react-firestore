@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
 import firebase from '../../Firebase';
-import { Link } from 'react-router-dom';
 import TextField from '@material-ui/core/TextField';
 import Grid from "@material-ui/core/Grid";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import Fab from "@material-ui/core/Fab";
 import NavigationIcon from "@material-ui/icons/Navigation";
-import { KeyboardDatePicker } from "@material-ui/pickers";
+import CIcon from '@material-ui/icons/Cancel';
+import VIcon from '@material-ui/icons/CheckBox';
 
 class CrearCblanco extends Component {
 
@@ -17,7 +16,6 @@ class CrearCblanco extends Component {
     this.ref = firebase.firestore().collection('solicitudes-cblanco');
     this.state = {
       distrito: 'CABALLO BLANCO',
-      //distrito: '',
       cantidad: '',
       destino: '',
       fechaS: '',
@@ -29,7 +27,6 @@ class CrearCblanco extends Component {
       detalle: '',
       fechaR: '',
       autorizada: ''
-
     };
   }
   onChange = (e) => {
@@ -72,71 +69,71 @@ class CrearCblanco extends Component {
         fechaR: '',
         autorizada: ''
       });
-      this.props.history.push("/lista-solicitudes-caballo-blanco")
+      window.location= "https://control-ambulancias-d69ec.firebaseapp.com/lista-solicitudes-caballo-blanco"
     })
     .catch((error) => {
       console.error("Error adding document: ", error);
     });
   }
-
-
  
+  veri() {
+    var autorizada2 = document.getElementById('autorizada').value;
+    var cantidad2 = document.getElementById('cantidad').value;
+    var destino2 = document.getElementById('destino').value;
+    var detalle2 = document.getElementById('detalle').value;
+    var fechaR2 = document.getElementById('fechaR').value;
+    var fechaS2 = document.getElementById('fechaS').value;
+    var personas2 = document.getElementById('personas').value;
+    var piloto2 = document.getElementById('piloto').value;
+    var placa2 = document.getElementById('placa').value;
+    var vehiculo2 = document.getElementById('vehiculo').value;
+    if (autorizada2 === '' || cantidad2 === '' || destino2 === '' || 
+         detalle2   === '' || fechaR2   === '' || fechaS2  === '' || 
+         personas2  === '' || piloto2   === '' || placa2   === '' || 
+         vehiculo2  === '') {
+         alert('Falta información por ingresar en el formulario ...');
+    }else{
+      var enviars = document.getElementById('enviar');
+      enviars.style.display = 'inline';
+    }
+  }
 
-  render() {
+  render() {    
 
-    /*var user2 =  firebase.auth().currentUser ;
-    console.log(user2)
-    
-    if (user2.email === 'reu@reu.com') {
-      console.log("el usuario es valido")
-      console.log("correo del usuario: " + user2.email)
-    } else {
-      alert('usuario no admitido')
-      window.location = '/' 
-      
-    }*/
+    window.onload=function() {
+      var enviars = document.getElementById('enviar');
+      enviars.style.display = 'none';
+    }
 
-    
     firebase.auth().onAuthStateChanged(function(user) {
       if (user) {
         // User is signed in.
-        console.log('si')
-        console.log("Correo lista: " + user.email)
+       // console.log('si')
+       // console.log("Correo lista: " + user.email)
        
-
         if (user.email === 'dcaballoblanco2013@gmail.com') {
-          console.log("el usuario es valido")
-          console.log("correo del usuario: " + user.email)
+          //console.log("el usuario es valido")
+          //console.log("correo del usuario: " + user.email)
         } else {
-          //alert('usuario no admitido')
-          window.location = '/' 
-          
+          window.location = '/'    
         }
-
-
 
       } else {
         // No user is signed in.
         console.log('no')
-        //alert('¡POR FAVOR INICIA SESIÓN!')
         window.location = '/' 
       }
     });
 
-    
-
-    const {  cantidad, destino, fechaS, personas, piloto, vehiculo, placa, detalle, fechaR, autorizada } = this.state;
-    return (
-
+      const {  cantidad, destino, fechaS, personas, piloto, vehiculo, placa, detalle, fechaR, autorizada } = this.state;
+      return (
 
       <div className="animated slideInUpTiny animation-duration-3">
         <div className="m-5">
           <Grid container spacing={3}>
             <Grid className="mx-auto">
-              <div >
               
-			  </div>
-			  <div>
+			        <div>
                 <h1 className="text-center font-weight-bold">
                   Solicitud de Combustible CABALLO BLANCO
                 </h1>
@@ -156,8 +153,7 @@ class CrearCblanco extends Component {
                   value="PENDIENTE"
                   onChange={this.onChange}
                   margin="normal"
-                  fullWidth
-                  
+                  fullWidth                  
                 />
 
                 <TextField
@@ -165,25 +161,18 @@ class CrearCblanco extends Component {
                   id="distrito"
                   name="distrito"
                   label="Distrito al que pertenece éste usuario:"
-
                   disabled
-
-
-                  // medio funciona   value={distrito , 'ejemplo'}
-
-
-                  //value="asdfasdf"
-                  value="CABALLO BLANCO"//{distrito}
+                  value="CABALLO BLANCO"
                   onChange={this.onChange}
                   margin="normal"
                   fullWidth
                 />
               
-				<TextField
-          id="destino"
-          required
-          autoFocus
-          name="destino"
+                  <TextField
+                    id="destino"
+                    required
+                    autoFocus
+                    name="destino"
                     value={destino}
                     onChange={this.onChange}
                     fullWidth
@@ -194,17 +183,16 @@ class CrearCblanco extends Component {
                       )
                     }}
                   />
-                    
-						
+  		
                 </div>
                 <div className="mt-4">
                   <TextField
-            id="vehiculo"
-            required
-            name="vehiculo"
-          value={vehiculo}
-          type="text"
-          onChange={this.onChange}
+                    id="vehiculo"
+                    required
+                    name="vehiculo"
+                    value={vehiculo}
+                    type="text"
+                    onChange={this.onChange}
                     fullWidth
                     InputProps={{
                       startAdornment: (
@@ -285,20 +273,20 @@ class CrearCblanco extends Component {
                       name="fechaS"
                       label="Salida: "
                       type="datetime-local"
-					  InputLabelProps={{ shrink: true, }}
+	          				  InputLabelProps={{ shrink: true, }}
                       value={fechaS}
                       required
-          onChange={this.onChange}
+                      onChange={this.onChange}
                     />
                   </Grid>
                   <Grid item xs={5}>
                     <TextField
-            id="piloto"
-            name="piloto"
-            required
+                      id="piloto"
+                      name="piloto"
+                      required
                       value={piloto}
                       type="text"
-          onChange={this.onChange}
+                      onChange={this.onChange}
                       fullWidth
                       InputProps={{
                         startAdornment: (
@@ -322,21 +310,21 @@ class CrearCblanco extends Component {
                       name="fechaR"
                       label="Retorno: "
                       type="date"
-					  InputLabelProps={{ shrink: true, }}
+					            InputLabelProps={{ shrink: true, }}
                       value={fechaR}
                       required
-          onChange={this.onChange}
+                      onChange={this.onChange}
                     />
                   </Grid>
                   
                   <Grid item xs={5}>
                     <TextField
-            id="autorizada"
-            name="autorizada"
-            required
+                      id="autorizada"
+                      name="autorizada"
+                      required
                       value={autorizada}
                       type="text"
-          onChange={this.onChange}
+                      onChange={this.onChange}
                       fullWidth
                       InputProps={{
                         startAdornment: (
@@ -354,21 +342,24 @@ class CrearCblanco extends Component {
               </div>
 
               <div className="mt-5 d-flex justify-content-center">
-                <Fab variant="extended" color="primary" aria-label="add" onClick={this.onSubmit}>
-                  <NavigationIcon />
-                  Enviar Solicitud
+              <Fab variant="extended" color="secondary" href="https://control-ambulancias-d69ec.firebaseapp.com/lista-solicitudes-caballo-blanco">
+                  Cancelar  <CIcon /> 
+                </Fab>
+                
+                <Fab id="cancelar" variant="extended"  color="primary" aria-label="add" onClick={this.veri}>
+                  verificar <VIcon />
+                </Fab>
+
+                <Fab id="enviar" variant="extended" color="primary" aria-label="add" onClick={this.onSubmit}>
+                  Enviar Solicitud <NavigationIcon />
                 </Fab>
               </div>
-              
               
             </Grid>
             
           </Grid>
         </div>
       </div>
-
-
-
 
     );
   }

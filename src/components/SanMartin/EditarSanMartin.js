@@ -65,7 +65,7 @@ class EditarSanMartin extends Component {
 
     const { estadosoli, distrito, cantidad, destino, fechaS, personas, piloto, vehiculo, placa, detalle, fechaR, autorizada } = this.state;
 
-    const updateRef = firebase.firestore().collection('solicitudes-reu').doc(this.state.key);
+    const updateRef = firebase.firestore().collection('solicitudes-san-martin').doc(this.state.key);
     updateRef.set({
       estadosoli,
       distrito,
@@ -95,8 +95,7 @@ class EditarSanMartin extends Component {
         fechaR: '',
         autorizada: ''
       });
-      //this.props.history.push("/show/"+this.props.match.params.id)
-      this.props.history.push("/lista-solicitudes-san-martin-zapotitlan")
+      window.location = "https://control-ambulancias-d69ec.firebaseapp.com/lista-solicitudes-pendientes"
     })
     .catch((error) => {
       console.error("Error adding document: ", error);
@@ -107,21 +106,17 @@ class EditarSanMartin extends Component {
     firebase.auth().onAuthStateChanged(function(user) {
       if (user) {
         // User is signed in.
-        console.log('si')
+        //console.log('si')
 
-        if (user.email === 'puestosanmartin@gmail.com') {
-          console.log("el usuario es valido")
-          console.log("correo del usuario: " + user.email)
+        if (user.email === 'cesarema7@gmail.com') {
+          //console.log("el usuario es valido")
+          //console.log("correo del usuario: " + user.email)
         } else {
-          //alert('usuario no admitido')
-          window.location = '/' 
-          
+          window.location = '/'           
         }
-
       } else {
         // No user is signed in.
-        console.log('no')
-        //alert('¡POR FAVOR INICIA SESIÓN!')
+        console.log('no')        
         window.location = '/' 
       }
     });
@@ -133,7 +128,7 @@ class EditarSanMartin extends Component {
             <Grid className="mx-auto">
               <div>
               <h4><Link to={`/detalle-solicitud-san-martin-zapotitlan/${this.state.key}`} class="btn btn-primary">Volver a detalles de solicitud SAN MARTÍN ZAPOTITLÁN</Link></h4>
-			  </div>
+			        </div>
 			  <div>
                 <h1 className="text-center font-weight-bold">
                   Solicitud de Combustible
@@ -162,25 +157,15 @@ class EditarSanMartin extends Component {
                   id="distrito"
                   name="distrito"
                   label="Distrito al que pertenece éste usuario:"
-
-                  disabled
-
-
-                  // medio funciona   value={distrito , 'ejemplo'}
-
-
-                  //value="asdfasdf"
                   value={this.state.distrito}
                   onChange={this.onChange}
                   margin="normal"
                   fullWidth
                 />
 
-                
-
-				<TextField
-          id="destino"
-          name="destino"
+                  <TextField
+                    id="destino"
+                    name="destino"
                     value={this.state.destino}
                     onChange={this.onChange}
                     fullWidth
@@ -190,19 +175,16 @@ class EditarSanMartin extends Component {
                         <InputAdornment position="start">Destino:</InputAdornment>
                       )
                     }}
-                  >
-                    
-                  </TextField>
-						
+                  />
+                    						
                 </div>
                 <div className="mt-4">
                   <TextField
-            id="vehiculo"
-            name="vehiculo"
-            value={this.state.vehiculo}
-          
-          type="text"
-          onChange={this.onChange}
+                    id="vehiculo"
+                    name="vehiculo"
+                    value={this.state.vehiculo}          
+                    type="text"
+                    onChange={this.onChange}
                     fullWidth
                     InputProps={{
                       startAdornment: (
@@ -211,9 +193,7 @@ class EditarSanMartin extends Component {
                         </InputAdornment>
                       )
                     }}
-                  >
-                   
-                  </TextField>
+                  />
 
                   <TextField
                     id="placa"
@@ -225,7 +205,6 @@ class EditarSanMartin extends Component {
                     margin="normal"
                     fullWidth
                   />
-
                 </div>
 
                 <div className="mt-1">
@@ -252,8 +231,7 @@ class EditarSanMartin extends Component {
                   id="cantidad"
                   name="cantidad"
                   label="Cantidad de Combustible que Solicita en Quetzales: "
-                  value={this.state.cantidad}
-                  
+                  value={this.state.cantidad}                  
                   onChange={this.onChange}
                   margin="normal"
                   fullWidth
@@ -264,13 +242,11 @@ class EditarSanMartin extends Component {
                   id="detalle"
                   name="detalle"
                   label="Detalle de comisión: "
-                  value={this.state.detalle}
-                  
+                  value={this.state.detalle}                  
                   onChange={this.onChange}
                   margin="normal"
                   fullWidth
                 />
-
               </div>
 
               <div className="mt-4">
@@ -283,19 +259,18 @@ class EditarSanMartin extends Component {
                       name="fechaS"
                       label="Salida: "
                       type="datetime-local"
-					  InputLabelProps={{ shrink: true, }}
-                      value={this.state.fechaS}
-                      
-          onChange={this.onChange}
+					            InputLabelProps={{ shrink: true, }}
+                      value={this.state.fechaS}                      
+                      onChange={this.onChange}
                     />
                   </Grid>
                   <Grid item xs={5}>
                     <TextField
-            id="piloto"
-            name="piloto"
+                      id="piloto"
+                      name="piloto"
                       value={this.state.piloto}
                       type="text"
-          onChange={this.onChange}
+                      onChange={this.onChange}
                       fullWidth
                       InputProps={{
                         startAdornment: (
@@ -305,9 +280,7 @@ class EditarSanMartin extends Component {
                         )
                       }}
                       className="mt-3"
-                    >
-                      
-                    </TextField>
+                    />                                      
                   </Grid>
                 </Grid>
               </div>
@@ -320,20 +293,19 @@ class EditarSanMartin extends Component {
                       name="fechaR"
                       label="Retorno: "
                       type="date"
-					  InputLabelProps={{ shrink: true, }}
-                      value={this.state.fechaR}
-                      
-          onChange={this.onChange}
+          					  InputLabelProps={{ shrink: true, }}
+                      value={this.state.fechaR}                      
+                      onChange={this.onChange}
                     />
                   </Grid>
                   
                   <Grid item xs={5}>
                     <TextField
-            id="autorizada"
-            name="autorizada"
+                      id="autorizada"
+                      name="autorizada"
                       value={this.state.autorizada}
                       type="text"
-          onChange={this.onChange}
+                      onChange={this.onChange}
                       fullWidth
                       InputProps={{
                         startAdornment: (
@@ -343,11 +315,8 @@ class EditarSanMartin extends Component {
                         )
                       }}
                       className="mt-3"
-                    >
-                      
-                    </TextField>
-                  </Grid>
-                  
+                    />                                          
+                  </Grid>                  
                 </Grid>
               </div>
 
@@ -356,17 +325,11 @@ class EditarSanMartin extends Component {
                   <NavigationIcon />
                   Actualizar Solicitud
                 </Fab>
-              </div>
-              
-              
-            </Grid>
-            
+              </div>                            
+            </Grid>            
           </Grid>
         </div>
       </div>
-
-
-
     );
   }
 }

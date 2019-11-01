@@ -24,8 +24,7 @@ class ListaLm2 extends Component {
         fechaS,
         destino,
         distrito,
-        estadosoli,
-        
+        estadosoli,    
       });
     });
     this.setState({
@@ -42,69 +41,26 @@ class ListaLm2 extends Component {
     firebase.auth().onAuthStateChanged(function(user) {
       if (user) {
         // User is signed in.
-        console.log('si')
-        console.log("Correo lista: " + user.email)
+        // console.log('si')
+        // console.log("Correo lista: " + user.email)
        
         if (user.email === 'csmaquina2@gmail.com') {
-          console.log("el usuario es valido")
-          console.log("correo del usuario: " + user.email)
+          // console.log("el usuario es valido")
+          // console.log("correo del usuario: " + user.email)
         } else {
-          //alert('usuario no admitido')
-          window.location = '/' 
-          
+          window.location = '/'
         }
 
       } else {
         // No user is signed in.
         console.log('no')
-        //alert('¡POR FAVOR INICIA SESIÓN!')
         window.location = '/' 
       }
     });
 
-    /*var user =  firebase.auth().currentUser ;
-    if (user.email === 'reu@reu.com') {
-      console.log("el usuario es valido")
-      console.log("correo del usuario: " + user.email)
-    } else {
-      alert('usuario no admitido')
-      window.location = '/' 
-      
-    }*/
-      /*
-		  .then(function(){
-			  alert('No autorizado')
-			  props.history.replace('/')
-		  })
-      .catch
-      
-
-    firebase.auth().onAuthStateChanged(function(user) {
-      if (user) {
-        // User is signed in.
-        console.log('si')
-        console.log("Correo lista: " + user.email)
-        var corre = (user.email);
-
-
-        if (corre == 'reu@reu.com') {
-          console.log('usuario permitido')
-        } else {
-          window.location = '/'   
-        }
-
-
-      } else {
-        // No user is signed in.
-        console.log('no')
-        alert('¡POR FAVOR INICIA SESIÓN!')
-        window.location = '/' 
-      }
-    }); */
     return (
       
       <div>
-        {/*<Navbar2/>*/}
       <div class="container">
         
         <div class="panel panel-default">
@@ -118,7 +74,6 @@ class ListaLm2 extends Component {
                     <Fab variant="extended" color="primary" href="https://control-ambulancias-d69ec.firebaseapp.com/nueva-solicitud-la-maquina-II">
                         Nueva Solicitud  <AIcon /> 
                     </Fab>
-            {/*<h4><Link to="/create">Nueva Solicitud <AIcon /> </Link></h4>*/}
             <table class="table table-stripe">
               <thead>
                 <tr>

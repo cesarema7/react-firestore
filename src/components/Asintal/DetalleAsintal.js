@@ -64,10 +64,9 @@ class DetalleAsintal extends Component {
     firebase.auth().onAuthStateChanged(function(user) {
       if (user) {
         // User is signed in.
-        console.log('si')
-        console.log("Correo lista: " + user.email)
+        //console.log('si')
+        //console.log("Correo lista: " + user.email)
        
-
         if (user.email === 'capelasintal@gmail.com' || 
             user.email === 'bedemo09@yahoo.com' || 
             user.email === 'victorlloranca@gmail.com' || 

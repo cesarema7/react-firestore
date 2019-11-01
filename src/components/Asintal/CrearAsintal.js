@@ -338,7 +338,7 @@ class CrearAsintal extends Component {
               </div>
 
               <div className="mt-5 d-flex justify-content-center">
-              <Fab variant="extended" color="secondary" href="https://control-ambulancias-d69ec.firebaseapp.com/lista-solicitudes-el-asintal">
+                <Fab variant="extended" color="secondary" href="https://control-ambulancias-d69ec.firebaseapp.com/lista-solicitudes-el-asintal">
                   Cancelar  <CIcon /> 
                 </Fab>
                 

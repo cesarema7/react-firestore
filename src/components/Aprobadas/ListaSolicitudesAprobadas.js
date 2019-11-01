@@ -1037,7 +1037,7 @@ class ListaSanMartinOk extends Component {
               <tbody>
                 {this.state.solicitudessanmartin.map(solicitudsanmartin =>
                   <tr>
-                    <td><Link to={`/detalle-solicitud-san-martin/${solicitudsanmartin.key}`}>{solicitudsanmartin.fechaS}</Link></td>
+                    <td><Link to={`/detalle-solicitud-san-martin-zapotitlan/${solicitudsanmartin.key}`}>{solicitudsanmartin.fechaS}</Link></td>
                     <td>{solicitudsanmartin.destino}</td>
                     <td>{solicitudsanmartin.distrito}</td>
                     <td>{solicitudsanmartin.estadosoli}</td>
